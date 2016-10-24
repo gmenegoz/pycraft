@@ -8,8 +8,10 @@
 # initialize
 import time, random, math, os, collections
 import mcpi.connection
-import mcpi.block as block
+import mcpi.blockslist as bl
 from mcpi.vec3 import Vec3
+from mcpi.event import *
+# import mcpi.minecraftturtle as mt
 conn = mcpi.connection.Connection("localhost", 4711)
 
 # find the player
@@ -19,113 +21,112 @@ players = map(int, ids.split("|"))
 player = players[0]
 
 #BLOCKS
-air = block.AIR.id
-stone = block.STONE.id
-grass = block.GRASS.id
-dirt = block.DIRT.id
-cobblestone = block.COBBLESTONE.id
-wood_planks = block.WOOD_PLANKS.id
-sapling = block.SAPLING.id
-bedrock = block.BEDROCK.id
-water_flowing = block.WATER_FLOWING.id
-water = block.WATER.id
-water_stationary = block.WATER_STATIONARY.id
-lava_flowing = block.LAVA_FLOWING.id
-lava = block.LAVA.id
-lava_stationary = block.LAVA_STATIONARY.id
-sand = block.SAND.id
-gravel = block.GRAVEL.id
-gold_ore = block.GOLD_ORE.id
-iron_ore = block.IRON_ORE.id
-coal_ore = block.COAL_ORE.id
-wood = block.WOOD.id
-leaves = block.LEAVES.id
-glass = block.GLASS.id
-lapis_lazuli_ore = block.LAPIS_LAZULI_ORE.id
-lapis_lazuli = block.LAPIS_LAZULI_BLOCK.id
-sandstone = block.SANDSTONE.id
-bed = block.BED.id
-cobweb = block.COBWEB.id
-grass_tall = block.GRASS_TALL.id
-wool = block.WOOL.id
-flower_yellow = block.FLOWER_YELLOW.id
-flower_cyan = block.FLOWER_CYAN.id
-mushroom_brown = block.MUSHROOM_BROWN.id
-mushroom_red = block.MUSHROOM_RED.id
-gold = block.GOLD_BLOCK.id
-iron = block.IRON_BLOCK.id
-stone_slab_double = block.STONE_SLAB_DOUBLE.id
-stone_slab = block.STONE_SLAB.id
-brick = block.BRICK_BLOCK.id
-tnt = block.TNT.id
-bookshelf = block.BOOKSHELF.id
-moss_stone = block.MOSS_STONE.id
-obsidian = block.OBSIDIAN.id
-torch = block.TORCH.id
-fire = block.FIRE.id
-stairs_wood = block.STAIRS_WOOD.id
-chest = block.CHEST.id
-diamond_ore = block.DIAMOND_ORE.id
-diamond = block.DIAMOND_BLOCK.id
-crafting_table = block.CRAFTING_TABLE.id
-farmland = block.FARMLAND.id
-furnace_inactive = block.FURNACE_INACTIVE.id
-furnace_active = block.FURNACE_ACTIVE.id
-door_wood = block.DOOR_WOOD.id
-ladder = block.LADDER.id
-stairs_cobblestone = block.STAIRS_COBBLESTONE.id
-door_iron = block.DOOR_IRON.id
-redstone_ore = block.REDSTONE_ORE.id
-snow = block.SNOW.id
-ice = block.ICE.id
-snow = block.SNOW_BLOCK.id
-cactus = block.CACTUS.id
-clay = block.CLAY.id
-sugar_cane = block.SUGAR_CANE.id
-fence = block.FENCE.id
-glowstone = block.GLOWSTONE_BLOCK.id
-stone_brick = block.STONE_BRICK.id
-glass_pane = block.GLASS_PANE.id
-melon = block.MELON.id
-fence_gate = block.FENCE_GATE.id
-glowing_obsidian = block.GLOWING_OBSIDIAN.id
-nether_reactor_core = block.NETHER_REACTOR_CORE.id
-monster_spawner = block.MONSTER_SPAWNER.id
-standing_sign = block.STANDING_SIGN_BLOCK.id
-rail = block.RAIL.id
-lever = block.LEVER.id
-sponge = block.SPONGE.id
-pumpkin = block.PUMPKIN.id
-netherrack = block.NETHERRACK.id
-soul_sand = block.SOUL_SAND.id
-jack = block.JACK.id
-stained_glass = block.STAINED_GLASS.id
-cobblestone_wall = block.COBBLESTONE_WALL.id
-prismarine = block.PRISMARINE.id
-sea_lantern = block.SEA_LANTERN.id
-hay_bale = block.HAY_BALE.id
-coal = block.COAL_BLOCK.id
-magma = block.MAGMA_BLOCK.id
-redstone = block.REDSTONE_BLOCK.id
-stained_glass_pane = block.STAINED_GLASS_PANE.id
-slime = block.SLIME_BLOCK.id
-carpet = block.CARPET.id
-redstone_torch = block.REDSTONE_TORCH.id
-piston = block.PISTON.id
-sticky_piston = block.STICKY_PISTON.id
-dispenser = block.DISPENSER.id
-note = block.NOTE_BLOCK.id
-stone_pressure_plate = block.STONE_PRESSURE_PLATE.id
-hopper = block.HOPPER.id
-dropper = block.DROPPER.id
-activator_rail = block.ACTIVATOR_RAIL.id
-powered_rail = block.POWERED_RAIL.id
-detector_rail = block.DETECTOR_RAIL.id
-beacon = block.BEACON.id
-emerald = block.EMERALD_BLOCK.id
-emerald_ore = block.EMERALD_ORE.id
-quartz = block.QUARTZ_BLOCK.id
-barrier = block.BARRIER.id
+air = bl.AIR.id
+stone = bl.STONE.id
+grass = bl.GRASS.id
+dirt = bl.DIRT.id
+cobblestone = bl.COBBLESTONE.id
+wood_planks = bl.WOOD_PLANKS.id
+sapling = bl.SAPLING.id
+bedrock = bl.BEDROCK.id
+water_flowing = bl.WATER_FLOWING.id
+water = bl.WATER.id
+water_stationary = bl.WATER_STATIONARY.id
+lava_flowing = bl.LAVA_FLOWING.id
+lava = bl.LAVA.id
+lava_stationary = bl.LAVA_STATIONARY.id
+sand = bl.SAND.id
+gravel = bl.GRAVEL.id
+gold_ore = bl.GOLD_ORE.id
+iron_ore = bl.IRON_ORE.id
+coal_ore = bl.COAL_ORE.id
+wood = bl.WOOD.id
+leaves = bl.LEAVES.id
+glass = bl.GLASS.id
+lapis_lazuli_ore = bl.LAPIS_LAZULI_ORE.id
+lapis_lazuli = bl.LAPIS_LAZULI_BLOCK.id
+sandstone = bl.SANDSTONE.id
+bed = bl.BED.id
+cobweb = bl.COBWEB.id
+grass_tall = bl.GRASS_TALL.id
+wool = bl.WOOL.id
+flower_yellow = bl.FLOWER_YELLOW.id
+flower_cyan = bl.FLOWER_CYAN.id
+mushroom_brown = bl.MUSHROOM_BROWN.id
+mushroom_red = bl.MUSHROOM_RED.id
+gold = bl.GOLD_BLOCK.id
+iron = bl.IRON_BLOCK.id
+stone_slab_double = bl.STONE_SLAB_DOUBLE.id
+stone_slab = bl.STONE_SLAB.id
+brick = bl.BRICK_BLOCK.id
+tnt = bl.TNT.id
+bookshelf = bl.BOOKSHELF.id
+moss_stone = bl.MOSS_STONE.id
+obsidian = bl.OBSIDIAN.id
+torch = bl.TORCH.id
+fire = bl.FIRE.id
+stairs_wood = bl.STAIRS_WOOD.id
+chest = bl.CHEST.id
+diamond_ore = bl.DIAMOND_ORE.id
+diamond = bl.DIAMOND_BLOCK.id
+crafting_table = bl.CRAFTING_TABLE.id
+farmland = bl.FARMLAND.id
+furnace_inactive = bl.FURNACE_INACTIVE.id
+furnace_active = bl.FURNACE_ACTIVE.id
+door_wood = bl.DOOR_WOOD.id
+ladder = bl.LADDER.id
+stairs_cobblestone = bl.STAIRS_COBBLESTONE.id
+door_iron = bl.DOOR_IRON.id
+redstone_ore = bl.REDSTONE_ORE.id
+ice = bl.ICE.id
+snow = bl.SNOW_BLOCK.id
+cactus = bl.CACTUS.id
+clay = bl.CLAY.id
+sugar_cane = bl.SUGAR_CANE.id
+fence = bl.FENCE.id
+glowstone = bl.GLOWSTONE_BLOCK.id
+stone_brick = bl.STONE_BRICK.id
+glass_pane = bl.GLASS_PANE.id
+melon = bl.MELON.id
+fence_gate = bl.FENCE_GATE.id
+glowing_obsidian = bl.GLOWING_OBSIDIAN.id
+nether_reactor_core = bl.NETHER_REACTOR_CORE.id
+monster_spawner = bl.MONSTER_SPAWNER.id
+standing_sign = bl.STANDING_SIGN_BLOCK.id
+rail = bl.RAIL.id
+lever = bl.LEVER.id
+sponge = bl.SPONGE.id
+pumpkin = bl.PUMPKIN.id
+netherrack = bl.NETHERRACK.id
+soul_sand = bl.SOUL_SAND.id
+jack = bl.JACK.id
+stained_glass = bl.STAINED_GLASS.id
+cobblestone_wall = bl.COBBLESTONE_WALL.id
+prismarine = bl.PRISMARINE.id
+sea_lantern = bl.SEA_LANTERN.id
+hay_bale = bl.HAY_BALE.id
+coal = bl.COAL_BLOCK.id
+magma = bl.MAGMA_BLOCK.id
+redstone = bl.REDSTONE_BLOCK.id
+stained_glass_pane = bl.STAINED_GLASS_PANE.id
+slime = bl.SLIME_BLOCK.id
+carpet = bl.CARPET.id
+redstone_torch = bl.REDSTONE_TORCH.id
+piston = bl.PISTON.id
+sticky_piston = bl.STICKY_PISTON.id
+dispenser = bl.DISPENSER.id
+note = bl.NOTE_BLOCK.id
+stone_pressure_plate = bl.STONE_PRESSURE_PLATE.id
+hopper = bl.HOPPER.id
+dropper = bl.DROPPER.id
+activator_rail = bl.ACTIVATOR_RAIL.id
+powered_rail = bl.POWERED_RAIL.id
+detector_rail = bl.DETECTOR_RAIL.id
+beacon = bl.BEACON.id
+emerald = bl.EMERALD_BLOCK.id
+emerald_ore = bl.EMERALD_ORE.id
+quartz = bl.QUARTZ_BLOCK.id
+barrier = bl.BARRIER.id
 ###############################################################
 
 
@@ -141,9 +142,34 @@ def flatten(l):
         else: yield e
 
 
-# draw point
-def drawPoint3d(x, y, z, blockType, blockData=0):
-    conn.send("world.setBlock", intFloor(x, y, z, blockType, blockData))
+# return maximum of 2 values
+def MAX(a, b):
+    if a > b:
+        return a
+    else:
+        return b
+
+
+# return step
+def ZSGN(a):
+    if a < 0:
+        return -1
+    elif a > 0:
+        return 1
+    elif a == 0:
+        return 0
+
+# def drawPoint3d(x, y, z, blockType, blockData=0):
+#     conn.send("world.setBlock", intFloor(x, y, z, blockType, blockData))
+
+
+# def drawVertices(self, vertices, blockType, blockData=0):
+#     for vertex in vertices:
+#         conn.send("world.setBlock", intFloor(vertex.x,
+#                                              vertex.y,
+#                                              vertex.z,
+#                                              blockType,
+#                                              blockData))
 
 
 #################################################################
@@ -151,14 +177,12 @@ def drawPoint3d(x, y, z, blockType, blockData=0):
 
 # def chat(text):
 #     mc.postToChat(text)
-
 def chat(text):
     conn.send("chat.post", text)
 
 
 # def where(target=player):
 #     return mc.entity.getTilePos(target)
-
 def where(target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     return Vec3(*map(int, s.split(",")))
@@ -171,7 +195,6 @@ def where(target=player):
 #         y += pos.y
 #         z += pos.z
 #     mc.entity.setTilePos(target, x, y, z)
-
 def move(x=0, y=0, z=0, target=player, absolute=False):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
@@ -192,16 +215,15 @@ def move(x=0, y=0, z=0, target=player, absolute=False):
 #         mcdrawing.drawSphere(x, y, z, radius, block)
 #     else:
 #         mcdrawing.drawHollowSphere(x, y, z, radius, block)
-#
 def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False, target=player):
-    s = conn.sendReceive("entity" + ".getTile", target)
-    pos = Vec3(*map(int, s.split(",")))
     if block is list:
         blockData = block[1]
         block = block[0]
     else:
         blockData=0
     if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
         x += pos.x
         y += pos.y
         z += pos.z
@@ -233,21 +255,20 @@ def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False, target
 #         mcdrawing.drawCircle(x, y, z, radius, block)
 #     elif direction == "horizontal":
 #         mcdrawing.drawHorizontalCircle(x, y, z, radius, block)
-
 def circle(block,
            radius=10,
            x=0, y=0, z=0,
            direction="vertical",
            absolute=False,
            target=player):
-    s = conn.sendReceive("entity" + ".getTile", target)
-    pos = Vec3(*map(int, s.split(",")))
     if block is list:
         blockData = block[1]
         block = block[0]
     else:
         blockData=0
     if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
         x += pos.x
         y += pos.y
         z += pos.z
@@ -318,6 +339,100 @@ def circle(block,
 #                            block)
 #     else:
 #         mcdrawing.drawLine(x1, y1, z1, x2, y2, z2, block)
+def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=player):
+    if block is list:
+        blockData = block[1]
+        block = block[0]
+    else:
+        blockData = 0
+    if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
+        x1 += pos.x
+        y1 += pos.y
+        z1 += pos.z
+        x2 = pos.x + x2
+        y2 = pos.y + y2
+        z2 = pos.z + z2
+    # list for vertices
+    vertices = []
+    # if the 2 points are the same, return single vertice
+    if (x1 == x2 and y1 == y2 and z1 == z2):
+        vertices.append(Vec3(x1, y1, z1))
+    # else get all points in edge
+    else:
+        dx = x2 - x1
+        dy = y2 - y1
+        dz = z2 - z1
+        ax = abs(dx) << 1
+        ay = abs(dy) << 1
+        az = abs(dz) << 1
+        sx = ZSGN(dx)
+        sy = ZSGN(dy)
+        sz = ZSGN(dz)
+        x = x1
+        y = y1
+        z = z1
+        # x dominant
+        if (ax >= MAX(ay, az)):
+            yd = ay - (ax >> 1)
+            zd = az - (ax >> 1)
+            loop = True
+            while (loop):
+                vertices.append(Vec3(x, y, z))
+                if (x == x2):
+                    loop = False
+                if (yd >= 0):
+                    y += sy
+                    yd -= ax
+                if (zd >= 0):
+                    z += sz
+                    zd -= ax
+                x += sx
+                yd += ay
+                zd += az
+        # y dominant
+        elif (ay >= MAX(ax, az)):
+            xd = ax - (ay >> 1)
+            zd = az - (ay >> 1)
+            loop = True
+            while (loop):
+                vertices.append(Vec3(x, y, z))
+                if (y == y2):
+                    loop = False
+                if (xd >= 0):
+                    x += sx
+                    xd -= ay
+                if (zd >= 0):
+                    z += sz
+                    zd -= ay
+                y += sy
+                xd += ax
+                zd += az
+        # z dominant
+        elif (az >= MAX(ax, ay)):
+            xd = ax - (az >> 1)
+            yd = ay - (az >> 1)
+            loop = True
+            while (loop):
+                vertices.append(Vec3(x, y, z))
+                if (z == z2):
+                    loop = False
+                if (xd >= 0):
+                    x += sx
+                    xd -= az
+                if (yd >= 0):
+                    y += sy
+                    yd -= az
+                z += sz
+                xd += ax
+                yd += ay
+    for vertex in vertices:
+        conn.send("world.setBlock", intFloor(vertex.x,
+                                             vertex.y,
+                                             vertex.z,
+                                             block,
+                                             blockData))
 #
 #
 # def block(block, x=0, y=0, z=0, absolute=False):
@@ -327,6 +442,19 @@ def circle(block,
 #         y += pos.y
 #         z += pos.z
 #     mc.setBlock(x, y, z, block)
+def block(block, x=0, y=0, z=0, absolute=False, target=player):
+    if block is list:
+        blockData = block[1]
+        block = block[0]
+    else:
+        blockData=0
+    if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
+        x += pos.x
+        y += pos.y
+        z += pos.z
+    conn.send("world.setBlock", intFloor(x, y, z, block, blockData))
 #
 #
 # def blocks(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False):
@@ -341,6 +469,22 @@ def circle(block,
 #                      block)
 #     else:
 #         mc.setBlocks(x1, y1, z1, x2, y2, z2, block)
+def blocks(block, x1=0, y1=0, z1=0, x=0, y=0, z=0, absolute=False, target=player):
+    if block is list:
+        blockData = block[1]
+        block = block[0]
+    else:
+        blockData=0
+    if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
+        x1 += pos.x
+        y1 += pos.y
+        z1 += pos.z
+        x = pos.x + x
+        y = pos.y + y
+        z = pos.z + z
+    conn.send("world.setBlocks", intFloor(x1, y1, z1, x, y, z, block, blockData))
 #
 #
 # def cube(block, side=10, x=0, y=0, z=0, absolute=False):
@@ -350,6 +494,19 @@ def circle(block,
 #         y += pos.y
 #         z += pos.z
 #     mc.setBlocks(x, y, z, x + side - 1, y + side - 1, z + side - 1, block)
+def cube(block, side=10, x=0, y=0, z=0, absolute=False, target=player):
+    if block is list:
+        blockData = block[1]
+        block = block[0]
+    else:
+        blockData=0
+    if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
+        x += pos.x
+        y += pos.y
+        z += pos.z
+    conn.send("world.setBlocks", intFloor(x, y, z, x + side - 1, y + side - 1, z + side - 1, block, blockData))
 #
 #
 # def pyramid(block, width=10, x=0, y=0, z=0, absolute=False):
@@ -365,14 +522,25 @@ def circle(block,
 #     else:
 #         mc.setBlocks(x, y, z, x + width - 1, y, z + width - 1, block)
 #         pyramid(block, width - 2, x + 1, y + 1, z + 1, absolute=True)
-#
-#
-# def turtle(block):
-#     pos = mc.entity.getTilePos(player)
-#     turtle = mt.MinecraftTurtle(mc, mcdrawing, pos, player)
-#     turtle.penblock(block)
-#     turtle.speed(10)
-#     return turtle
+def pyramid(block, width=11, x=0, y=0, z=0, absolute=False, target=player):
+    if block is list:
+        blockData = block[1]
+        block = block[0]
+    else:
+        blockData=0
+    if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
+        x += pos.x
+        y += pos.y
+        z += pos.z
+    if width % 2 == 0:
+        width += 1
+    if width == 1:
+        conn.send("world.setBlock", intFloor(x, y, z, block, blockData))
+    else:
+        conn.send("world.setBlocks", intFloor(x, y, z, x + width - 1, y, z + width - 1, block, blockData))
+        pyramid(block, width - 2, x + 1, y + 1, z + 1, absolute=True)
 #
 #
 # def over(block, target=player):
@@ -382,6 +550,12 @@ def circle(block,
 #                            pos.z)
 #     if material == block:
 #         return True
+def over(block, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    material = int(conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z)))
+    if material == block:
+        return True
 #
 #
 # def under(target=player):
@@ -390,6 +564,11 @@ def circle(block,
 #                            pos.y - 1,
 #                            pos.z)
 #     return material
+def under(target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    material = conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z))
+    return material
 #
 #
 # def what(x, y, z, absolute=False):
@@ -400,6 +579,15 @@ def circle(block,
 #         z += pos.z
 #     material = mc.getBlock(x, y, z)
 #     return material
+def what(x, y, z, absolute=False, target=player):
+    if not absolute:
+        s = conn.sendReceive("entity" + ".getTile", target)
+        pos = Vec3(*map(int, s.split(",")))
+        x += pos.x
+        y += pos.y
+        z += pos.z
+    material = conn.sendReceive("world.getBlock", intFloor(x, y, z))
+    return material
 #
 #
 # def near(block, radius=10):
@@ -414,6 +602,19 @@ def circle(block,
 #     for b in blocks:
 #         if b == block:
 #             return True
+def near(block, radius=10, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    blocks = conn.sendReceive("world.getBlocks", intFloor(pos.x - radius,
+                                                          pos.y - radius,
+                                                          pos.z - radius,
+                                                          pos.x + radius,
+                                                          pos.y + radius,
+                                                          pos.z + radius))
+    blocks = map(int, blocks.split(","))
+    for b in blocks:
+        if b == block:
+            return True
 #
 #
 # def readnumber(text):
@@ -426,6 +627,16 @@ def circle(block,
 #         except:
 #             chat("Il valore inserito non e' un numero valido")
 #     return value
+def readnumber(text=""):
+    done = False
+    value = 0
+    while not done:
+        try:
+            value = int(inputFromChat(text))
+            done = True
+        except:
+            chat("Il valore inserito non e' un numero valido")
+    return value
 #
 #
 # def readstring(text):
@@ -438,6 +649,16 @@ def circle(block,
 #         except:
 #             chat("Il valore inserito non e' valido")
 #     return value
+def readstring(text=""):
+    done = False
+    value = 0
+    while not done:
+        try:
+            value = inputFromChat(text)
+            done = True
+        except:
+            chat("Il valore inserito non e' valido")
+    return value
 #
 #
 # def inputFromChat(text):
@@ -451,6 +672,20 @@ def circle(block,
 #             break
 #         time.sleep(0.10)
 #     return value
+def inputFromChat(text):
+    chat(text)
+    readDone = False
+    value = "0"
+    while not readDone:
+        s = conn.sendReceive("events.chat.posts")
+        events = [e for e in s.split("|") if e]
+        poll = [ChatEvent.Post(int(e[:e.find(",")]), e[e.find(",") + 1:]) for e in events]
+        for msg in poll:
+            value = msg.message
+            readDone = True
+            break
+        time.sleep(0.10)
+    return value
 #
 #
 # def polygon(block, shape=6, side=10, x=0, y=0, z=0, absolute=False):
@@ -476,8 +711,129 @@ def circle(block,
 #         x = targetx
 #         z = targetz
 #         i -= 1
-#
-#
+def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", absolute=False, target=player):
+    if direction == "horizontal":
+        if block is list:
+            blockData = block[1]
+            block = block[0]
+        else:
+            blockData = 0
+        if not absolute:
+            s = conn.sendReceive("entity" + ".getTile", target)
+            pos = Vec3(*map(int, s.split(",")))
+            x = x + pos.x
+            y = y + pos.y
+            z = z + pos.z
+        angle = 0
+        i = shape
+        side -= 1
+        startx = x
+        startz = z
+        while i > 0:
+            if i == 1:
+                targetx = startx
+                targetz = startz
+            else:
+                targetx = int(round(x + side * math.cos(angle), 0))
+                targetz = int(round(z + side * math.sin(angle), 0))
+            # line starts here:
+            # list for vertices
+            vertices = []
+            # if the 2 points are the same, return single vertice
+            if (x == targetx and y == y and z == targetz):
+                vertices.append(Vec3(x, y, z))
+            # else get all points in edge
+            else:
+                dx = targetx - x
+                dy = y - y
+                dz = targetz - z
+                ax = abs(dx) << 1
+                ay = abs(dy) << 1
+                az = abs(dz) << 1
+                sx = ZSGN(dx)
+                sy = ZSGN(dy)
+                sz = ZSGN(dz)
+                x = x
+                y = y
+                z = z
+                # x dominant
+                if (ax >= MAX(ay, az)):
+                    yd = ay - (ax >> 1)
+                    zd = az - (ax >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (x == targetx):
+                            loop = False
+                        if (yd >= 0):
+                            y += sy
+                            yd -= ax
+                        if (zd >= 0):
+                            z += sz
+                            zd -= ax
+                        x += sx
+                        yd += ay
+                        zd += az
+                # y dominant
+                elif (ay >= MAX(ax, az)):
+                    xd = ax - (ay >> 1)
+                    zd = az - (ay >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (y == y):
+                            loop = False
+                        if (xd >= 0):
+                            x += sx
+                            xd -= ay
+                        if (zd >= 0):
+                            z += sz
+                            zd -= ay
+                        y += sy
+                        xd += ax
+                        zd += az
+                # z dominant
+                elif (az >= MAX(ax, ay)):
+                    xd = ax - (az >> 1)
+                    yd = ay - (az >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (z == targetz):
+                            loop = False
+                        if (xd >= 0):
+                            x += sx
+                            xd -= az
+                        if (yd >= 0):
+                            y += sy
+                            yd -= az
+                        z += sz
+                        xd += ax
+                        yd += ay
+            for vertex in vertices:
+                conn.send("world.setBlock", intFloor(vertex.x,
+                                                     vertex.y,
+                                                     vertex.z,
+                                                     block,
+                                                     blockData))
+            # line(block, x, y, z, targetx, y, targetz)
+            angle += 2 * math.pi / shape
+            x = targetx
+            z = targetz
+            i -= 1
+
+
+
+# def turtle(block, target=player):
+#     s = conn.sendReceive("entity" + ".getTile", target)
+#     pos = Vec3(*map(int, s.split(",")))
+#     turtle = mt.MinecraftTurtle(mc, mcdrawing, pos, player)
+#     turtle.penblock(block)
+#     turtle.speed(10)
+#     return turtle
+
+
+
 # def maze(csvpath, base=grass, wall=gold, obstacle=lava):
 #   #apro il file del labirinto
 #   f = open(csvpath, "r")
