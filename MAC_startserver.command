@@ -6,5 +6,5 @@ echo "By continuing you are indicating your agreement to our EULA https://accoun
 echo "Press any key to continue"
 read -n 1 -s
 cd "$( dirname "$0" )"
-cd MyAdventures/stuff/server/
+cd projects/stuff/server/
 java -jar craftbukkit-1.10.2.jar

@@ -2,31 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0fb4087b-f0da-42eb-b351-37a65545ad42" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/lab1.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/block.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/gold_detector.py" afterPath="$PROJECT_DIR$/MyAdventures/gold_detector.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/magic_cube.py" afterPath="$PROJECT_DIR$/MyAdventures/magic_cube.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/maze.py" afterPath="$PROJECT_DIR$/MyAdventures/maze.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/new.py" afterPath="$PROJECT_DIR$/MyAdventures/new.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/LICENSE" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/README.md" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dfractaltree.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dfractaltree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dfractaltree_colors.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dfractaltree_colors.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dnautilus.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dnautilus.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_adventuresinrpi.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_adventuresinrpi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_circle.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_circle.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_fractal.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_fractal.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_fractaltree.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_fractaltree.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_pattern.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_pattern.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_spiral.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_spiral.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_squares.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_squares.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraft-pi-edition-LICENSE.txt" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraft-pi-edition-LICENSE.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraft.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraft.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraftstuff.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraftstuff.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraftturtle.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraftturtle.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/stuff/pycraft.py" afterPath="$PROJECT_DIR$/MyAdventures/stuff/pycraft.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/traps.py" afterPath="$PROJECT_DIR$/MyAdventures/traps.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyAdventures/turtle_circles.py" afterPath="$PROJECT_DIR$/MyAdventures/turtle_circles.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/gold_detector.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/magic_cube.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/maze.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/maze1.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/new.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._.DS_Store" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/.___init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._block.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._connection.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._event.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._minecraft-pi-edition-LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._minecraft-stuff-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._minecraft.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._minecraftstuff.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._util.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/._vec3.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/blockslist.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/connection.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/event.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dfractaltree.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dfractaltree_colors.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_3dnautilus.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_adventuresinrpi.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_circle.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_fractal.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_fractaltree.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_pattern.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_spiral.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/example_squares.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraft-pi-edition-LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraft-stuff-LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraft.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraftstuff.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/minecraftturtle.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/util.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/mcpi/vec3.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/pycraft.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/pyrduino.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/banned-ips.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/banned-players.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/bukkit.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/commands.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/craftbukkit-1.10.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/eula.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/help.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/ops.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/permissions.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/plugins/RaspberryJuice/config.yml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/plugins/raspberryjuice-1.8.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/server.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/usercache.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/stuff/server/whitelist.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/test.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/traps.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/MyAdventures/turtle_circles.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LINUX_startserver.sh" afterPath="$PROJECT_DIR$/LINUX_startserver.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MAC_startserver.command" afterPath="$PROJECT_DIR$/MAC_startserver.command" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WINDOWS_startserver.bat" afterPath="$PROJECT_DIR$/WINDOWS_startserver.bat" />
     </list>
     <ignored path="pycraft.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,28 +84,7 @@
     <favorites_list name="pycraft" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MyAdventures/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pycraft.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MyAdventures/stuff/pycraft.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -128,46 +145,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pycraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pycraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyAdventures" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pycraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pycraft" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="MyAdventures" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stuff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Python.test">
     <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -350,23 +337,23 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901832" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -385,6 +372,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/MyAdventures/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MyAdventures/stuff/pycraft.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -393,13 +388,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MyAdventures/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/MyAdventures/test.py" />
+    <entry file="file://$PROJECT_DIR$/MyAdventures/stuff/pycraft.py" />
+    <entry file="file://$PROJECT_DIR$/MyAdventures/test.py" />
+    <entry file="file://$PROJECT_DIR$/MyAdventures/stuff/pycraft.py" />
+    <entry file="file://$PROJECT_DIR$/MyAdventures/stuff/pycraft.py" />
+    <entry file="file://$PROJECT_DIR$/MyAdventures/test.py" />
   </component>
 </project>
