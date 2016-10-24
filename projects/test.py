@@ -2,7 +2,7 @@ from stuff.pycraft import *
 
 pos = where()
 chat(pos)
-
+#
 move(3, 10, 5)
 
 chat(where())
