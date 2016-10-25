@@ -11,7 +11,7 @@ sphere(ice)
 
 circle([wool, 5], direction="horizontal")
 
-line(gold, 0, 0, 0, 0, 5, 0)
+line(gold, 0, 0, 0, 0, 50, 0)
 
 block(ice, y=3)
 
