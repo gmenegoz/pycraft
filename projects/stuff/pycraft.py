@@ -10,7 +10,6 @@ import time, random, math, os
 import mcpi.connection
 import mcpi.blockslist as bl
 from mcpi.util import *
-from mcpi.vec3 import Vec3
 from mcpi.event import *
 import mcpi.minecraftturtle as mt
 conn = mcpi.connection.Connection("localhost", 4711)

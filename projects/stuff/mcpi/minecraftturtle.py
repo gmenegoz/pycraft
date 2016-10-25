@@ -61,21 +61,111 @@ class MinecraftTurtle:
 
     def _moveTurtle(self,x,y,z):
         #get bls between current position and next
-        targetX, targetY, targetZ = int(x), int(y), int(z)
+        targetx, targety, targetz = int(x), int(y), int(z)
         #if walking, set target Y to be height of world
-        if self.flying == False: targetY = int(self.conn.sendReceive("world.getHeight", intFloor(targetX, targetZ)))
-        currentX, currentY, currentZ = int(self.position.x), int(self.position.y), int(self.position.z)
-
-
+        if self.flying == False: targety = int(self.conn.sendReceive("world.getHeight", intFloor(targetx, targetz)))
+        currentx, currenty, currentz = int(self.position.x), int(self.position.y), int(self.position.z)
         #clear the turtle
         if self.showturtle: self._clearTurtle(self.lastDrawnTurtle.x, self.lastDrawnTurtle.y, self.lastDrawnTurtle.z)
-
         #if speed is 0 and flying, just draw the line, else animate it
         if self.turtlespeed == 0 and self.flying:
             #draw the line
-            if self._pendown: self.mcDrawing.drawLine(currentX, currentY - 1, currentZ, targetX, targetY - 1, targetZ, self._penbl.id, self._penbl.data)
+            if self._pendown:
+                # if block is list:
+                #     blockData = block[1]
+                #     block = block[0]
+                # else:
+                #     blockData = 0
+                # if not absolute:
+                #     s = conn.sendReceive("entity" + ".getTile", target)
+                #     pos = Vec3(*map(int, s.split(",")))
+                #     currentx += pos.x
+                #     currenty += pos.y
+                #     currentz += pos.z
+                #     targetx = pos.x + targetx
+                #     targety = pos.y + targety
+                #     targetz = pos.z + targetz
+                # list for vertices
+                vertices = []
+                # if the 2 points are the same, return single vertice
+                if (currentx == targetx and currenty == targety and currentz == targetz):
+                    vertices.append(Vec3(currentx, currenty, currentz))
+                # else get all points in edge
+                else:
+                    dx = targetx - currentx
+                    dy = targety - currenty
+                    dz = targetz - currentz
+                    ax = abs(dx) << 1
+                    ay = abs(dy) << 1
+                    az = abs(dz) << 1
+                    sx = ZSGN(dx)
+                    sy = ZSGN(dy)
+                    sz = ZSGN(dz)
+                    x = currentx
+                    y = currenty
+                    z = currentz
+                    # x dominant
+                    if (ax >= MAX(ay, az)):
+                        yd = ay - (ax >> 1)
+                        zd = az - (ax >> 1)
+                        loop = True
+                        while (loop):
+                            vertices.append(Vec3(x, y, z))
+                            if (x == targetx):
+                                loop = False
+                            if (yd >= 0):
+                                y += sy
+                                yd -= ax
+                            if (zd >= 0):
+                                z += sz
+                                zd -= ax
+                            x += sx
+                            yd += ay
+                            zd += az
+                    # y dominant
+                    elif (ay >= MAX(ax, az)):
+                        xd = ax - (ay >> 1)
+                        zd = az - (ay >> 1)
+                        loop = True
+                        while (loop):
+                            vertices.append(Vec3(x, y, z))
+                            if (y == targety):
+                                loop = False
+                            if (xd >= 0):
+                                x += sx
+                                xd -= ay
+                            if (zd >= 0):
+                                z += sz
+                                zd -= ay
+                            y += sy
+                            xd += ax
+                            zd += az
+                    # z dominant
+                    elif (az >= MAX(ax, ay)):
+                        xd = ax - (az >> 1)
+                        yd = ay - (az >> 1)
+                        loop = True
+                        while (loop):
+                            vertices.append(Vec3(x, y, z))
+                            if (z == targetz):
+                                loop = False
+                            if (xd >= 0):
+                                x += sx
+                                xd -= az
+                            if (yd >= 0):
+                                y += sy
+                                yd -= az
+                            z += sz
+                            xd += ax
+                            yd += ay
+                for vertex in vertices:
+                    self.conn.send("world.setBlock", intFloor(vertex.x,
+                                                         vertex.y,
+                                                         vertex.z,
+                                                         self._penbl))
+                # self.mcDrawing.drawLine(currentX, currentY - 1, currentZ, targetX, targetY - 1, targetZ, self._penbl.id, self._penbl.data)
         else:
-            blsBetween = self.mcDrawing.getLine(currentX, currentY, currentZ, targetX, targetY, targetZ)
+            blsBetween = self.mcDrawing.getLine(currentx, currenty, currentz, targetx, targety, targetz)
             if self.verticalheading > 215 and self.verticalheading < 315:
                 self.previous = -1
                 for blBetween in blsBetween:
@@ -94,7 +184,7 @@ class MinecraftTurtle:
                 #update turtle's position to be the target
                 self.position.x, self.position.y, self.position.z = x,y,z
                 #draw turtle
-                if self.showturtle: self._drawTurtle(targetX, targetY - 2, targetZ)
+                if self.showturtle: self._drawTurtle(targetx, targety - 2, targetz)
             elif self.verticalheading > 45 and self.verticalheading < 135:
                 self.previous = 1
                 for blBetween in blsBetween:
@@ -112,7 +202,7 @@ class MinecraftTurtle:
                 #update turtle's position to be the target
                 self.position.x, self.position.y, self.position.z = x,y,z
                 #draw turtle
-                if self.showturtle: self._drawTurtle(targetX, targetY, targetZ)
+                if self.showturtle: self._drawTurtle(targetx, targety, targetz)
             else:
                 if self.previous == -1:
                     for blBetween in blsBetween:
@@ -128,7 +218,7 @@ class MinecraftTurtle:
                     #update turtle's position to be the target
                     self.position.x, self.position.y, self.position.z = x,y,z
                     #draw turtle
-                    if self.showturtle: self._drawTurtle(targetX, targetY - 2, targetZ)
+                    if self.showturtle: self._drawTurtle(targetx, targety - 2, targetz)
                 else:
                     for blBetween in blsBetween:
                         #print blBetween
@@ -143,7 +233,7 @@ class MinecraftTurtle:
                     #update turtle's position to be the target
                     self.position.x, self.position.y, self.position.z = x,y,z
                     #draw turtle
-                    if self.showturtle: self._drawTurtle(targetX, targetY, targetZ)
+                    if self.showturtle: self._drawTurtle(targetx, targety, targetz)
                 self.previous = 0
 
 
