@@ -1,2 +1,2 @@
 cd projects/stuff/server/
-java -jar craftbukkit-1.10.2.jar
+java -jar spigot-1.10.2.jar

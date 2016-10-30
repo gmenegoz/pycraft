@@ -3,31 +3,36 @@ from stuff.pycraft import *
 pos = where()
 chat(pos)
 
-move(3, 10, 5)
+# maze("maze1.csv")
 
-chat(where())
+# t = turtle(ice)
+# t.forward(10)
 
-sphere(ice)
-
-circle([wool, 5], direction="horizontal")
-
-line(gold, 0, 0, 0, 0, 5, 0)
-
-block(ice, y=3)
-
-blocks(ice, x=5, y=6, z=10)
-
-size = readnumber("tell the size...")
-
-cube(redstone, size)
-
-text = readstring("say something...")
-
-chat("I said: " + text)
-
-pyramid(sandstone)
-
-polygon(obsidian, 12, 30)
+# move(3, 10, 5)
+#
+# chat(where())
+#
+# sphere(ice)
+#
+# circle([wool, 5], direction="horizontal")
+#
+# line(gold, 0, 0, 0, 0, 50, 0)
+#
+# block(ice, y=3)
+#
+# blocks(ice, x=5, y=6, z=10)
+#
+# size = readnumber("tell the size...")
+#
+# cube(redstone, size)
+#
+# text = readstring("say something...")
+#
+# chat("I said: " + text)
+#
+# pyramid(sandstone)
+#
+# polygon(obsidian, 12, 30)
 
 # while True:
 #     if over(ice):
@@ -40,6 +45,19 @@ polygon(obsidian, 12, 30)
 
 
 
+# TURTLE LOOP
+# uga = turtle(redstone)
+# passi = 2
+# while True:
+#     uga.forward(passi)
+#     uga.left(87)
+#     passi = passi + 2
+
+
+
+
+
+# ANIMATE CUBE
 # x = pos.x
 # y = pos.y
 # z = pos.z

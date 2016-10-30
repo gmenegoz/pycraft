@@ -7,4 +7,4 @@ echo "Press any key to continue"
 read -n 1 -s
 cd "$( dirname "$0" )"
 cd projects/stuff/server/
-java -jar craftbukkit-1.10.2.jar
+java -jar spigot-1.10.2.jar

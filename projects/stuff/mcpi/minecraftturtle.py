@@ -2,31 +2,21 @@
 #Martin O'Hanlon
 #www.stuffaboutcode.com
 
-import minecraft
-import block
 import time
 import math
-import collections
-
-
-def flatten(l):
-    for e in l:
-        if isinstance(e, collections.Iterable) and not isinstance(e, basestring):
-            for ee in flatten(e): yield ee
-        else: yield e
-
-
-def flatten_parameters_to_string(l):
-    return ",".join(map(str, flatten(l)))
+import blockslist as bl
+from vec3 import Vec3
+from util import *
 
 
 class MinecraftTurtle:
 
     SPEEDTIMES = {0:0, 12:0.001, 11:0.01, 10:0.1, 9:0.2, 8:0.3, 7:0.4, 6:0.5, 5:0.6, 4:0.7, 3:0.8, 2:0.9, 1:1}
 
-    def __init__(self, mc, mcdrawing, position, player):
+    def __init__(self, conn, position, player):
         #set defaults
-        self.mc = mc
+        self.conn = conn
+        self.target = player
         self.player = player
         #start position
         self.startposition = position
@@ -37,24 +27,22 @@ class MinecraftTurtle:
         self.verticalheading = 0
         #set pen down
         self._pendown = True
-        #set pen block to black wool
-        self._penblock = block.Block(block.WOOL.id, 15)
+        #set pen bl to black wool
+        self._penbl = bl.Block(bl.WOOL.id, 15)
         #flying to true
         self.flying = True
         #set speed
         self.turtlespeed = 6
         #create turtle
         self.showturtle = True
-        # create drawing object
-        self.mcDrawing = mcdrawing
-        # set turtle block
-        self.turtleblock = block.Block(block.DIAMOND_BLOCK.id)
+        # set turtle bl
+        self.turtlebl = bl.Block(bl.DIAMOND_BLOCK.id)
         # draw turtle
         self._drawTurtle(int(self.position.x), int(self.position.y), int(self.position.y))
         #previous vertical heading
         self.previous = 0
         #last turtle
-        self.lastDrawnTurtle = minecraft.Vec3(0,0,0)
+        self.lastDrawnTurtle = Vec3(0,0,0)
 
     def forward(self, distance):
         #get end of line
@@ -72,90 +60,271 @@ class MinecraftTurtle:
         self._moveTurtle(x,y,z)
 
     def _moveTurtle(self,x,y,z):
-        #get blocks between current position and next
-        targetX, targetY, targetZ = int(x), int(y), int(z)
+        #get bls between current position and next
+        targetx, targety, targetz = int(x), int(y), int(z)
         #if walking, set target Y to be height of world
-        if self.flying == False: targetY = self.mc.getHeight(targetX, targetZ)
-        currentX, currentY, currentZ = int(self.position.x), int(self.position.y), int(self.position.z)
-
-
+        if self.flying == False: targety = int(self.conn.sendReceive("world.getHeight", intFloor(targetx, targetz)))
+        currentx, currenty, currentz = int(self.position.x), int(self.position.y), int(self.position.z)
         #clear the turtle
         if self.showturtle: self._clearTurtle(self.lastDrawnTurtle.x, self.lastDrawnTurtle.y, self.lastDrawnTurtle.z)
-
         #if speed is 0 and flying, just draw the line, else animate it
         if self.turtlespeed == 0 and self.flying:
             #draw the line
-            if self._pendown: self.mcDrawing.drawLine(currentX, currentY - 1, currentZ, targetX, targetY - 1, targetZ, self._penblock.id, self._penblock.data)
+            if self._pendown:
+                # if block is list:
+                #     blockData = block[1]
+                #     block = block[0]
+                # else:
+                #     blockData = 0
+                # if not absolute:
+                #     s = conn.sendReceive("entity" + ".getTile", target)
+                #     pos = Vec3(*map(int, s.split(",")))
+                #     currentx += pos.x
+                #     currenty += pos.y
+                #     currentz += pos.z
+                #     targetx = pos.x + targetx
+                #     targety = pos.y + targety
+                #     targetz = pos.z + targetz
+                # list for vertices
+                vertices = []
+                # if the 2 points are the same, return single vertice
+                if (currentx == targetx and currenty == targety and currentz == targetz):
+                    vertices.append(Vec3(currentx, currenty, currentz))
+                # else get all points in edge
+                else:
+                    dx = targetx - currentx
+                    dy = targety - currenty
+                    dz = targetz - currentz
+                    ax = abs(dx) << 1
+                    ay = abs(dy) << 1
+                    az = abs(dz) << 1
+                    sx = ZSGN(dx)
+                    sy = ZSGN(dy)
+                    sz = ZSGN(dz)
+                    x = currentx
+                    y = currenty
+                    z = currentz
+                    # x dominant
+                    if (ax >= MAX(ay, az)):
+                        yd = ay - (ax >> 1)
+                        zd = az - (ax >> 1)
+                        loop = True
+                        while (loop):
+                            vertices.append(Vec3(x, y, z))
+                            if (x == targetx):
+                                loop = False
+                            if (yd >= 0):
+                                y += sy
+                                yd -= ax
+                            if (zd >= 0):
+                                z += sz
+                                zd -= ax
+                            x += sx
+                            yd += ay
+                            zd += az
+                    # y dominant
+                    elif (ay >= MAX(ax, az)):
+                        xd = ax - (ay >> 1)
+                        zd = az - (ay >> 1)
+                        loop = True
+                        while (loop):
+                            vertices.append(Vec3(x, y, z))
+                            if (y == targety):
+                                loop = False
+                            if (xd >= 0):
+                                x += sx
+                                xd -= ay
+                            if (zd >= 0):
+                                z += sz
+                                zd -= ay
+                            y += sy
+                            xd += ax
+                            zd += az
+                    # z dominant
+                    elif (az >= MAX(ax, ay)):
+                        xd = ax - (az >> 1)
+                        yd = ay - (az >> 1)
+                        loop = True
+                        while (loop):
+                            vertices.append(Vec3(x, y, z))
+                            if (z == targetz):
+                                loop = False
+                            if (xd >= 0):
+                                x += sx
+                                xd -= az
+                            if (yd >= 0):
+                                y += sy
+                                yd -= az
+                            z += sz
+                            xd += ax
+                            yd += ay
+                for vertex in vertices:
+                    self.conn.send("world.setBlock", intFloor(vertex.x,
+                                                         vertex.y,
+                                                         vertex.z,
+                                                         self._penbl))
+                # self.mcDrawing.drawLine(currentX, currentY - 1, currentZ, targetX, targetY - 1, targetZ, self._penbl.id, self._penbl.data)
         else:
-            blocksBetween = self.mcDrawing.getLine(currentX, currentY, currentZ, targetX, targetY, targetZ)
+
+
+
+            # def getLine(self, currentx, currenty, currentz, targetx, targety, targetz):
+            # return maximum of 2 values
+
+            # list for vertices
+            vertices = []
+
+            # if the 2 points are the same, return single vertice
+            if (currentx == targetx and currenty == targety and currentz == targetz):
+                vertices.append(Vec3(currentx, currenty, currentz))
+
+            # else get all points in edge
+            else:
+
+                dx = targetx - currentx
+                dy = targety - currenty
+                dz = targetz - currentz
+
+                ax = abs(dx) << 1
+                ay = abs(dy) << 1
+                az = abs(dz) << 1
+
+                sx = ZSGN(dx)
+                sy = ZSGN(dy)
+                sz = ZSGN(dz)
+
+                x = currentx
+                y = currenty
+                z = currentz
+
+                # x dominant
+                if (ax >= MAX(ay, az)):
+                    yd = ay - (ax >> 1)
+                    zd = az - (ax >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (x == targetx):
+                            loop = False
+                        if (yd >= 0):
+                            y += sy
+                            yd -= ax
+                        if (zd >= 0):
+                            z += sz
+                            zd -= ax
+                        x += sx
+                        yd += ay
+                        zd += az
+                # y dominant
+                elif (ay >= MAX(ax, az)):
+                    xd = ax - (ay >> 1)
+                    zd = az - (ay >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (y == targety):
+                            loop = False
+                        if (xd >= 0):
+                            x += sx
+                            xd -= ay
+                        if (zd >= 0):
+                            z += sz
+                            zd -= ay
+                        y += sy
+                        xd += ax
+                        zd += az
+                # z dominant
+                elif (az >= MAX(ax, ay)):
+                    xd = ax - (az >> 1)
+                    yd = ay - (az >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (z == targetz):
+                            loop = False
+                        if (xd >= 0):
+                            x += sx
+                            xd -= az
+                        if (yd >= 0):
+                            y += sy
+                            yd -= az
+                        z += sz
+                        xd += ax
+                        yd += ay
+
+            blsBetween = vertices
+            # blsBetween = self.mcDrawing.getLine(currentx, currenty, currentz, targetx, targety, targetz)
+
+
+
             if self.verticalheading > 215 and self.verticalheading < 315:
                 self.previous = -1
-                for blockBetween in blocksBetween:
+                for blBetween in blsBetween:
                     #if walking update the y, to be the height of the world
-                    if self.flying == False: blockBetween.y = self.mc.getHeight(blockBetween.x, blockBetween.z)
+                    if self.flying == False: blBetween.y = int(self.conn.sendReceive("world.getHeight", intFloor(blBetween.x, blBetween.z)))
                     #check the material on the new turtle position
-                    #replace = self.mc.getBlock(blockBetween.x, blockBetween.y, blockBetween.z)
+                    #replace = self.mc.getBlock(blBetween.x, blBetween.y, blBetween.z)
                     #draw the turtle
-                    if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
+                    if self.showturtle: self._drawTurtle(blBetween.x, blBetween.y-2, blBetween.z)
                     #draw the pen
-                    if self._pendown: self.mcDrawing.drawPoint3d(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data)
+                    if self._pendown: self.conn.send("world.setBlock", intFloor(blBetween.x, blBetween.y - 1, blBetween.z, self._penbl.id, self._penbl.data))
                     #wait
                     time.sleep(self.SPEEDTIMES[self.turtlespeed])
                     #clear the turtle
-                    if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
+                    if self.showturtle: self._clearTurtle(blBetween.x, blBetween.y-2, blBetween.z)
                 #update turtle's position to be the target
                 self.position.x, self.position.y, self.position.z = x,y,z
                 #draw turtle
-                if self.showturtle: self._drawTurtle(targetX, targetY - 2, targetZ)
+                if self.showturtle: self._drawTurtle(targetx, targety - 2, targetz)
             elif self.verticalheading > 45 and self.verticalheading < 135:
                 self.previous = 1
-                for blockBetween in blocksBetween:
-                    #print blockBetween
+                for blBetween in blsBetween:
+                    #print blBetween
                     #if walking update the y, to be the height of the world
-                    if self.flying == False: blockBetween.y = self.mc.getHeight(blockBetween.x, blockBetween.z)
+                    if self.flying == False: blBetween.y = int(self.conn.sendReceive("world.getHeight", intFloor(blBetween.x, blBetween.z)))
                     #draw the turtle
-                    if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
+                    if self.showturtle: self._drawTurtle(blBetween.x, blBetween.y, blBetween.z)
                     #draw the pen
-                    if self._pendown: self.mcDrawing.drawPoint3d(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data)
+                    if self._pendown: self.conn.send("world.setBlock", intFloor(blBetween.x, blBetween.y - 1, blBetween.z, self._penbl.id, self._penbl.data))
                     #wait
                     time.sleep(self.SPEEDTIMES[self.turtlespeed])
                     #clear the turtle
-                    if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
+                    if self.showturtle: self._clearTurtle(blBetween.x, blBetween.y, blBetween.z)
                 #update turtle's position to be the target
                 self.position.x, self.position.y, self.position.z = x,y,z
                 #draw turtle
-                if self.showturtle: self._drawTurtle(targetX, targetY, targetZ)
+                if self.showturtle: self._drawTurtle(targetx, targety, targetz)
             else:
                 if self.previous == -1:
-                    for blockBetween in blocksBetween:
-                        #print blockBetween
+                    for blBetween in blsBetween:
+                        #print blBetween
                         #if walking update the y, to be the height of the world
-                        if self.flying == False: blockBetween.y = self.mc.getHeight(blockBetween.x, blockBetween.z)
+                        if self.flying == False: blBetween.y = int(self.conn.sendReceive("world.getHeight", intFloor(blBetween.x, blBetween.z)))
                         #draw the turtle
-                        if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
-                        if self._pendown: self.mcDrawing.drawPoint3d(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data)
+                        if self.showturtle: self._drawTurtle(blBetween.x, blBetween.y-2, blBetween.z)
+                        if self._pendown: self.conn.send("world.setBlock", intFloor(blBetween.x, blBetween.y - 1, blBetween.z, self._penbl.id, self._penbl.data))
                         time.sleep(self.SPEEDTIMES[self.turtlespeed])
-                        if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
+                        if self.showturtle: self._clearTurtle(blBetween.x, blBetween.y-2, blBetween.z)
                         #self.mc.postToChat(-self.verticalheading)
                     #update turtle's position to be the target
                     self.position.x, self.position.y, self.position.z = x,y,z
                     #draw turtle
-                    if self.showturtle: self._drawTurtle(targetX, targetY - 2, targetZ)
+                    if self.showturtle: self._drawTurtle(targetx, targety - 2, targetz)
                 else:
-                    for blockBetween in blocksBetween:
-                        #print blockBetween
+                    for blBetween in blsBetween:
+                        #print blBetween
                         #if walking update the y, to be the height of the world
-                        if self.flying == False: blockBetween.y = self.mc.getHeight(blockBetween.x, blockBetween.z)
+                        if self.flying == False: blBetween.y = int(self.conn.sendReceive("world.getHeight", intFloor(blBetween.x, blBetween.z)))
                         #draw the turtle
-                        if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
-                        if self._pendown: self.mcDrawing.drawPoint3d(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data)
+                        if self.showturtle: self._drawTurtle(blBetween.x, blBetween.y, blBetween.z)
+                        if self._pendown: self.conn.send("world.setBlock", intFloor(blBetween.x, blBetween.y - 1, blBetween.z, self._penbl.id, self._penbl.data))
                         time.sleep(self.SPEEDTIMES[self.turtlespeed])
-                        if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
+                        if self.showturtle: self._clearTurtle(blBetween.x, blBetween.y, blBetween.z)
                         #self.mc.postToChat(self.verticalheading)
                     #update turtle's position to be the target
                     self.position.x, self.position.y, self.position.z = x,y,z
                     #draw turtle
-                    if self.showturtle: self._drawTurtle(targetX, targetY, targetZ)
+                    if self.showturtle: self._drawTurtle(targetx, targety, targetz)
                 self.previous = 0
 
 
@@ -198,7 +367,8 @@ class MinecraftTurtle:
 
     def setposition(self, x, y, z, absolute=False):
         if not absolute:
-            pos = self.mc.entity.getTilePos(self.player)
+            s = self.conn.sendReceive("entity" + ".getTile", self.target)
+            pos = Vec3(*map(int, s.split(",")))
             #clear the turtle
             if self.showturtle:
                 self._clearTurtle(self.position.x,
@@ -258,20 +428,20 @@ class MinecraftTurtle:
         self.flying = False
         self.verticalheading = 0
 
-    def penblock(self, blockId, blockData = 0):
-        self._penblock = block.Block(blockId, blockData)
+    def penblock(self, blId, blData = 0):
+        self._penbl = bl.Block(blId, blData)
 
     def speed(self, turtlespeed):
         self.turtlespeed = turtlespeed
 
     def _drawTurtle(self,x,y,z):
         #draw turtle
-        self.mcDrawing.drawPoint3d(x, y, z, self.turtleblock.id, self.turtleblock.data)
-        self.lastDrawnTurtle = minecraft.Vec3(x,y,z)
+        self.conn.send("world.setBlock", intFloor(x, y, z, self.turtlebl.id, self.turtlebl.data))
+        self.lastDrawnTurtle = Vec3(x,y,z)
 
     def _clearTurtle(self,x,y,z):
         #clear turtle
-        self.mcDrawing.drawPoint3d(x, y, z, block.AIR.id)
+        self.conn.send("world.setBlock", intFloor(x, y, z, bl.AIR.id))
 
     def _findTargetBlock(self, turtleX, turtleY, turtleZ, heading, verticalheading, distance):
         x,y,z = self._findPointOnSphere(turtleX, turtleY, turtleZ, heading, verticalheading, distance)
@@ -286,10 +456,10 @@ class MinecraftTurtle:
         z = cz + (radius * (math.cos(math.radians(verticalAngle)) * math.sin(math.radians(horizontalAngle))))
         return x, y, z
 
-    def _roundXYZ(x,y,z):
+    def _roundXYZ(self, x,y,z):
         return int(round(x,0)), int(round(y,0)), int(round(z,0))
 
-    def _roundVec3(position):
-        return minecraft.vec3(int(position.x), int(position.y), int(position.z))
+    def _roundVec3(self, position):
+        return Vec3(int(position.x), int(position.y), int(position.z))
 
 

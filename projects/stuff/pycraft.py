@@ -6,12 +6,12 @@
 # mcdrawing = minecraftstuff.MinecraftDrawing(mc)
 
 # initialize
-import time, random, math, os, collections
+import time, random, math, os
 import mcpi.connection
 import mcpi.blockslist as bl
-from mcpi.vec3 import Vec3
+from mcpi.util import *
 from mcpi.event import *
-# import mcpi.minecraftturtle as mt
+import mcpi.minecraftturtle as mt
 conn = mcpi.connection.Connection("localhost", 4711)
 
 # find the player
@@ -128,48 +128,6 @@ emerald_ore = bl.EMERALD_ORE.id
 quartz = bl.QUARTZ_BLOCK.id
 barrier = bl.BARRIER.id
 ###############################################################
-
-
-# UTIL FUNCTIONS:
-def intFloor(*args):
-    return [int(math.floor(x)) for x in flatten(args)]
-
-
-def flatten(l):
-    for e in l:
-        if isinstance(e, collections.Iterable) and not isinstance(e, basestring):
-            for ee in flatten(e): yield ee
-        else: yield e
-
-
-# return maximum of 2 values
-def MAX(a, b):
-    if a > b:
-        return a
-    else:
-        return b
-
-
-# return step
-def ZSGN(a):
-    if a < 0:
-        return -1
-    elif a > 0:
-        return 1
-    elif a == 0:
-        return 0
-
-# def drawPoint3d(x, y, z, blockType, blockData=0):
-#     conn.send("world.setBlock", intFloor(x, y, z, blockType, blockData))
-
-
-# def drawVertices(self, vertices, blockType, blockData=0):
-#     for vertex in vertices:
-#         conn.send("world.setBlock", intFloor(vertex.x,
-#                                              vertex.y,
-#                                              vertex.z,
-#                                              blockType,
-#                                              blockData))
 
 
 #################################################################
@@ -823,7 +781,6 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
             i -= 1
 
 
-
 # def turtle(block, target=player):
 #     s = conn.sendReceive("entity" + ".getTile", target)
 #     pos = Vec3(*map(int, s.split(",")))
@@ -831,51 +788,45 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
 #     turtle.penblock(block)
 #     turtle.speed(10)
 #     return turtle
+def turtle(block, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    turtle = mt.MinecraftTurtle(conn, pos, player)
+    turtle.penblock(block)
+    turtle.speed(10)
+    return turtle
 
 
-
-# def maze(csvpath, base=grass, wall=gold, obstacle=lava):
-#   #apro il file del labirinto
-#   f = open(csvpath, "r")
-#
-#   #ottengo la posizione del giocatore
-#   pos = mc.entity.getTilePos(player)
-#
-#   #definisco la coordinata -z- di partenza
-#   z = pos.z+1
-#
-#   #PER OGNI riga del file del labirinto...
-#   for line in f.readlines():
-#     #divido la riga dove ci sono le virgole ottenendo una lista di celle
-#     data = line.split(",")
-#
-#     #ricomincio dalla posizione -x- originaria ad ogni ciclo del loop
-#     x = pos.x+1
-#
-#     #PER OGNI cella nella lista...
-#     for cell in data:
-#       #SE la cella e' 0
-#       if cell == "0":
-#         #ALLORA, il blocco da posizionare sara' ARIA
-#         blocco = air
-#       elif cell == "2":
-#         blocco = obstacle
-#       #ALTRIMENTI GOLD
-#       else:
-#         blocco = wall
-#
-#       #posiziono il blocco stabilito
-#       mc.setBlock(x, pos.y, z, blocco)
-#       mc.setBlock(x, pos.y+1, z, blocco)
-#
-#       #costruisco il pavimento
-#       mc.setBlock(x, pos.y-1, z, base)
-#
-#       #mi sposto di 1 sull'asse X
-#       x = x + 1
-#
-#     #mi sposto di 1 sull'asse Z
-#     z = z + 1
+def maze(csvpath, base=grass, wall=gold, obstacle=lava, target=player):
+    # open maze csv
+    f = open(csvpath, "r")
+    # find player position
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    # define z start coordinate
+    z = pos.z+1
+    # for each line of the csv...
+    for line in f.readlines():
+        data = line.split(",")
+        # restart from the original x at every loop cycle
+        x = pos.x+1
+        # for each cell in the list...
+        for cell in data:
+            if cell == "0":
+                selectedblock = air
+            elif cell == "2":
+                selectedblock = obstacle
+            else:
+                selectedblock = wall
+            # set the selected block
+            conn.send("world.setBlock", intFloor(x, pos.y, z, selectedblock))
+            conn.send("world.setBlock", intFloor(x, pos.y+1, z, selectedblock))
+            # build the floor
+            conn.send("world.setBlock", intFloor(x, pos.y-1, z, base))
+            # move on the x axis
+            x = x + 1
+        # move on the z axis
+        z = z + 1
 
 
 #class chatListener:
