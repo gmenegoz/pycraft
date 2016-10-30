@@ -45,6 +45,19 @@ chat(pos)
 
 
 
+# TURTLE LOOP
+# uga = turtle(redstone)
+# passi = 2
+# while True:
+#     uga.forward(passi)
+#     uga.left(87)
+#     passi = passi + 2
+
+
+
+
+
+# ANIMATE CUBE
 # x = pos.x
 # y = pos.y
 # z = pos.z

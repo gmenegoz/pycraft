@@ -165,7 +165,98 @@ class MinecraftTurtle:
                                                          self._penbl))
                 # self.mcDrawing.drawLine(currentX, currentY - 1, currentZ, targetX, targetY - 1, targetZ, self._penbl.id, self._penbl.data)
         else:
-            blsBetween = self.mcDrawing.getLine(currentx, currenty, currentz, targetx, targety, targetz)
+
+
+
+            # def getLine(self, currentx, currenty, currentz, targetx, targety, targetz):
+            # return maximum of 2 values
+
+            # list for vertices
+            vertices = []
+
+            # if the 2 points are the same, return single vertice
+            if (currentx == targetx and currenty == targety and currentz == targetz):
+                vertices.append(Vec3(currentx, currenty, currentz))
+
+            # else get all points in edge
+            else:
+
+                dx = targetx - currentx
+                dy = targety - currenty
+                dz = targetz - currentz
+
+                ax = abs(dx) << 1
+                ay = abs(dy) << 1
+                az = abs(dz) << 1
+
+                sx = ZSGN(dx)
+                sy = ZSGN(dy)
+                sz = ZSGN(dz)
+
+                x = currentx
+                y = currenty
+                z = currentz
+
+                # x dominant
+                if (ax >= MAX(ay, az)):
+                    yd = ay - (ax >> 1)
+                    zd = az - (ax >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (x == targetx):
+                            loop = False
+                        if (yd >= 0):
+                            y += sy
+                            yd -= ax
+                        if (zd >= 0):
+                            z += sz
+                            zd -= ax
+                        x += sx
+                        yd += ay
+                        zd += az
+                # y dominant
+                elif (ay >= MAX(ax, az)):
+                    xd = ax - (ay >> 1)
+                    zd = az - (ay >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (y == targety):
+                            loop = False
+                        if (xd >= 0):
+                            x += sx
+                            xd -= ay
+                        if (zd >= 0):
+                            z += sz
+                            zd -= ay
+                        y += sy
+                        xd += ax
+                        zd += az
+                # z dominant
+                elif (az >= MAX(ax, ay)):
+                    xd = ax - (az >> 1)
+                    yd = ay - (az >> 1)
+                    loop = True
+                    while (loop):
+                        vertices.append(Vec3(x, y, z))
+                        if (z == targetz):
+                            loop = False
+                        if (xd >= 0):
+                            x += sx
+                            xd -= az
+                        if (yd >= 0):
+                            y += sy
+                            yd -= az
+                        z += sz
+                        xd += ax
+                        yd += ay
+
+            blsBetween = vertices
+            # blsBetween = self.mcDrawing.getLine(currentx, currenty, currentz, targetx, targety, targetz)
+
+
+
             if self.verticalheading > 215 and self.verticalheading < 315:
                 self.previous = -1
                 for blBetween in blsBetween:

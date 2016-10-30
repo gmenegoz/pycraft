@@ -5,6 +5,6 @@ ECHO "  Note - make sure Minecraft is using version 1.8"
 ECHO "By continuing you are indicating your agreement to our EULA https://account.mojang.com/documents/minecraft_eula)."
 pause
 cd projects/stuff/server/
-java -jar craftbukkit-1.10.2.jar
+java -jar spigot-1.10.2.jar
 pause
 ECHO ON
