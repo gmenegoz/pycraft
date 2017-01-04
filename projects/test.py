@@ -4,10 +4,10 @@ pos = where()
 chat(pos)
 
 # maze("maze1.csv")
-
+#
 # t = turtle(ice)
 # t.forward(10)
-
+#
 # move(3, 10, 5)
 #
 # chat(where())
@@ -33,7 +33,24 @@ chat(pos)
 # pyramid(sandstone)
 #
 # polygon(obsidian, 12, 30)
+#
+# chat("Hello Minecraft!")
+#
+# color = 0
+#
+# uga = turtle([wool, color])
+#
+# while True:
+#
+#     for i in range(18):
+#         uga.forward(5)
+#         uga.up(20)
+#     uga.up(30)
+#     color += 1
+#     uga.penblock([wool, color % 12])
 
+
+# GOLD in ICE
 # while True:
 #     if over(ice):
 #         chat("ice")
@@ -42,18 +59,31 @@ chat(pos)
 #         chat("gold nearby!")
 
 
-
-
-
 # TURTLE LOOP
 # uga = turtle(redstone)
 # passi = 2
 # while True:
 #     uga.forward(passi)
-#     uga.left(87)
+#     uga.left(90)
 #     passi = passi + 2
 
+# uga = turtle(redstone)
+# bea = turtle(beacon)
+# bea.setposition(0, 1, 0)
+# # col = turtle(beacon)
+#
+# while True:
+#     uga.forward(1)
+#     bea.forward(1)
 
+# uga = turtle(redstone)
+# bea = turtle(powered_rail)
+# bea.setposition(0, 1, 0)
+# # col = turtle(beacon)
+#
+# while True:
+#     uga.forward(2)
+#     bea.forward(1)
 
 
 
