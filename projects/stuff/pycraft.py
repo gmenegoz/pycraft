@@ -1,3 +1,6 @@
+# Pycraft: a library of functions to learn Python coding via Minecraft
+#    Copyright (C) 2016  Alessandro Norfo & Giuseppe Menegoz
+
 #inizializzo
 # import mcpi.minecraft as minecraft
 # import mcpi.minecraftstuff as minecraftstuff
