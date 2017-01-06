@@ -16,10 +16,12 @@
 *.dmg
 *.gz
 *.iso
-#*.jar
+*.jar
 *.rar
 *.tar
 *.zip
+*.json
+*.yml
 
 # Logs and databases #
 ######################
@@ -47,10 +49,11 @@ Thumbs.db
 .project
 .settings
 composer.lock
+.Rhistory
 
 # Minecraft world files #
 #########################
-
+server.properties
 /projects/stuff/server/world/*
 /projects/stuff/server/world_nether/*
 /projects/stuff/server/world_the_end/*
