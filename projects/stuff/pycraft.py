@@ -787,13 +787,17 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
 #     turtle.penblock(block)
 #     turtle.speed(10)
 #     return turtle
-def turtle(block, target=player):
+def Turtle(block, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
     turtle = MinecraftTurtle(conn, pos, player)
     turtle.penblock(block)
     turtle.speed(10)
     return turtle
+
+
+def turtle(*args):
+    return Turtle(*args)
 
 
 def maze(csvpath, base=grass, wall=gold, obstacle=lava, target=player):
