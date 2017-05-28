@@ -13,9 +13,7 @@ Giuseppe Menegoz, gmenegoz@gmail.com
 
 # Getting Started
 ## Setup
-As first thing, let’s install Python 2.7 on our computer!
-At this link you will find an article in which we explain the details to install Python, and also some advice on the IDE (or the editor) you should use to write your own programs in Python:
-https://apprendimentocreativo.wordpress.com/2016/10/ 11 / install-python / 
+First of all, let’s install Python 2.7 on our computer! You can find it at: https://www.python.org/downloads/
  
 You will also need to install the Java Runtime Environment, to be able to launch the Spigot server. Then connect to the following address and download the appropriate installer for your operating system:
 https://java.com/it/download/manual.jsp
