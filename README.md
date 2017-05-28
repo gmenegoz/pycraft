@@ -1,26 +1,20 @@
-# ![alt text](https://alessandronorfo.files.wordpress.com/2017/04/pycraft.png?w=136&h=150) pycraft
+# Pycraft
+![alt text](https://alessandronorfo.files.wordpress.com/2017/04/pycraft.png?w=136&h=150)
 
 Modified, simplified and improved libraries to code in python via Minecraft
-
-GETTING STARTED ITA: https://goo.gl/e1o5fD
-GETTING STARTED ENGLISH (Work In Progress): https://goo.gl/XQ62tV
 
 Based on the terrific idea and the original code of David Whale and Martin O'Hanlon (www.stuffaboutcode.com)
 
 Alessandro Norfo, ale.norfo@gmail.com
 Giuseppe Menegoz, gmenegoz@gmail.com
 
-**RECIPES** at: https://goo.gl/bn1Uz2
-
 # Getting Started
 ## Setup
 First of all, let’s install Python 2.7 on our computer! You can find it at: https://www.python.org/downloads/
  
-You will also need to install the Java Runtime Environment, to be able to launch the Spigot server. Then connect to the following address and download the appropriate installer for your operating system:
-https://java.com/it/download/manual.jsp
- 
-After installing Python and Java, you can download Pycraft from this link:
-https://github.com/gmenegoz/pycraft/archive/2.0.zip 
+You will also need to install the Java Runtime Environment, to be able to launch the Spigot server. Download the appropriate installer for your operating system: https://java.com/it/download/manual.jsp
+
+After installing Python and Java, you can download Pycraft from this link: https://github.com/gmenegoz/pycraft/archive/2.0.zip 
  
 Now, extract the zip archive contents.
 As you can see Pycraft works in a dedicated folder and you don’t need to install anything.
@@ -39,3 +33,14 @@ Now we are ready to begin!
 Let’s start the server by double-clicking the file that corresponds to your operating system.
 Once you launched Minecraft, choose "multiplayer" then "direct connect", typing "localhost" as address.
 If you access the world of Minecraft it means that everything worked properly :) ...otherwise try to re-read the instructions above :(
+
+## RECIPES
+Now that the Pycraft environment is setted up you are ready to explore and play with Python in Minecraft. 
+
+You will find some "Pycraft Recipes" at: https://goo.gl/bn1Uz2
+
+Refer to the wiki as library documentation: https://github.com/gmenegoz/pycraft/wiki
+
+You can also read the full Pycraft "GETTING STARTED" article: 
+ITA: https://goo.gl/e1o5fD
+ENG (Work In Progress): https://goo.gl/XQ62tV
