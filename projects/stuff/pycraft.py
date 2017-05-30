@@ -783,17 +783,13 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
 # def turtle(block, target=player):
 #     s = conn.sendReceive("entity" + ".getTile", target)
 #     pos = Vec3(*map(int, s.split(",")))
-#     turtle = mt.MinecraftTurtle(mc, mcdrawing, pos, player)
+#     turtle = MinecraftTurtle(conn, pos, player)
 #     turtle.penblock(block)
 #     turtle.speed(10)
 #     return turtle
-def turtle(block, target=player):
-    s = conn.sendReceive("entity" + ".getTile", target)
-    pos = Vec3(*map(int, s.split(",")))
-    turtle = MinecraftTurtle(conn, pos, player)
-    turtle.penblock(block)
-    turtle.speed(10)
-    return turtle
+
+def turtle(penblock, target=player):
+    return Turtle(penblock, target)
 
 
 def maze(csvpath, base=grass, wall=gold, obstacle=lava, target=player):
@@ -855,39 +851,53 @@ def maze(csvpath, base=grass, wall=gold, obstacle=lava, target=player):
 
 #TURTLE
 
-class MinecraftTurtle:
+class Turtle:
 
-    SPEEDTIMES = {0:0, 12:0.001, 11:0.01, 10:0.1, 9:0.2, 8:0.3, 7:0.4, 6:0.5, 5:0.6, 4:0.7, 3:0.8, 2:0.9, 1:1}
+    SPEEDTIMES = {0: 0,
+                  12: 0.001,
+                  11: 0.01,
+                  10: 0.1,
+                  9: 0.2,
+                  8: 0.3,
+                  7: 0.4,
+                  6: 0.5,
+                  5: 0.6,
+                  4: 0.7,
+                  3: 0.8,
+                  2: 0.9,
+                  1: 1}
 
-    def __init__(self, conn, position, player):
-        #set defaults
-        #conn = conn
+    def __init__(self, penblock, target=player):
+        # set defaults
         self.player = player
-        #start position
-        self.startposition = position
-        #set turtle position
-        self.position = position
-        #set turtle angles
+        # start position
+        s = conn.sendReceive("entity" + ".getTile", target)
+        self.startposition = Vec3(*map(int, s.split(",")))
+        # set turtle position
+        self.position = Vec3(*map(int, s.split(",")))
+        # set turtle angles
         self.heading = 0
         self.verticalheading = 0
-        #set pen down
+        # set pen down
         self._pendown = True
-        #set pen bl to black wool
+        # set pen bl to black wool
         self._penblock = bl.Block(bl.WOOL.id, 15)
-        #flying to true
+        # flying to true
         self.flying = True
-        #set speed
+        # set speed
         self.turtlespeed = 6
-        #create turtle
+        # create turtle
         self.showturtle = True
         # set turtle bl
         self.turtleblock = bl.Block(bl.DIAMOND_BLOCK.id)
         # draw turtle
         self._drawTurtle(int(self.position.x), int(self.position.y), int(self.position.y))
-        #previous vertical heading
+        # previous vertical heading
         self.previous = 0
-        #last turtle
-        self.lastDrawnTurtle = Vec3(0,0,0)
+        # last turtle
+        self.lastDrawnTurtle = Vec3(0, 0, 0)
+        self.penblock(penblock)
+        self.speed(10)
 
     def forward(self, distance):
         #get end of line
@@ -1031,7 +1041,7 @@ class MinecraftTurtle:
     def setz(self, z):
         self.setposition(self.position.x, self.position.y, z)
 
-    def setposition(self, x, y, z, absolute=False):
+    def setposition(self, x=0, y=0, z=0, absolute=False):
         if not absolute:
             pos = where(player)
             #clear the turtle
