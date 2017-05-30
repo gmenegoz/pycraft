@@ -4,7 +4,7 @@ from stuff.pycraft import *
 color = 1
 conta = 0
 
-uga = Turtle([wool, color])
+uga = turtle([wool, color])
 uga.up(90)
 
 while True:
