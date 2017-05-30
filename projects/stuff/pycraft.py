@@ -789,6 +789,7 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
 #     return turtle
 
 def turtle(penblock, target=player):
+    chat('Remember that class names should be Capital Letter (Turtle, not turtle)!')
     return Turtle(penblock, target)
 
 
