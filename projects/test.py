@@ -5,14 +5,14 @@ chat(pos)
 
 maze("maze1.csv")
 
-t = turtle(ice)
+t = turtle(obsidian)
 t.forward(10)
 
 move(3, 10, 5)
 
 chat(where())
 
-sphere(ice)
+sphere(ice, y=-20)
 
 circle([wool, 5], direction="horizontal")
 

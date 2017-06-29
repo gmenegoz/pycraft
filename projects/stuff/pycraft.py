@@ -141,10 +141,10 @@ def move(x=0, y=0, z=0, target=player, absolute=False):
 
 def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -156,13 +156,13 @@ def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False, target
             for yd in range(radius * -1, radius):
                 for zd in range(radius * -1, radius):
                     if xd ** 2 + yd ** 2 + zd ** 2 < radius ** 2:
-                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, blockData))
+                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, block_data))
     else:
         for xd in range(radius * -1, radius):
             for yd in range(radius * -1, radius):
                 for zd in range(radius * -1, radius):
                     if (xd ** 2 + yd ** 2 + zd ** 2 < radius ** 2) and (xd ** 2 + yd ** 2 + zd ** 2 > (radius ** 2 - (radius * 2))):
-                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, blockData))
+                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, block_data))
 
 
 def circle(block,
@@ -172,10 +172,10 @@ def circle(block,
            absolute=False,
            target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -188,10 +188,10 @@ def circle(block,
         ddf_y = -2 * radius
         xd = 0
         yd = radius
-        conn.send("world.setBlock", intFloor(x, y + radius, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x, y - radius, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x + radius, y, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x - radius, y, z, block, blockData))
+        conn.send("world.setBlock", intFloor(x, y + radius, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x, y - radius, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x + radius, y, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x - radius, y, z, block, block_data))
         while xd < yd:
             if f >= 0:
                 yd -= 1
@@ -200,25 +200,24 @@ def circle(block,
             xd += 1
             ddf_x += 2
             f += ddf_x
-            conn.send("world.setBlock", intFloor(x + xd, y + yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y + yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x + xd, y - yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y - yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x + yd, y + xd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - yd, y + xd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x + yd, y - xd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - yd, y - xd, z, block, blockData))
+            conn.send("world.setBlock", intFloor(x + xd, y + yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y + yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x + xd, y - yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y - yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x + yd, y + xd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - yd, y + xd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x + yd, y - xd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - yd, y - xd, z, block, block_data))
     elif direction == "horizontal":
         f = 1 - radius
         ddf_x = 1
         ddf_z = -2 * radius
         xd = 0
         zd = radius
-        conn.send("world.setBlock", intFloor(x, y, z + radius, block, blockData))
-        conn.send("world.setBlock", intFloor(x, y, z - radius, block, blockData))
-        conn.send("world.setBlock", intFloor(x + radius, y, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x - radius, y, z, block, blockData))
-
+        conn.send("world.setBlock", intFloor(x, y, z + radius, block, block_data))
+        conn.send("world.setBlock", intFloor(x, y, z - radius, block, block_data))
+        conn.send("world.setBlock", intFloor(x + radius, y, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x - radius, y, z, block, block_data))
         while xd < zd:
             if f >= 0:
                 zd -= 1
@@ -227,22 +226,22 @@ def circle(block,
             xd += 1
             ddf_x += 2
             f += ddf_x
-            conn.send("world.setBlock", intFloor(x + xd, y, z + zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y, z + zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x + xd, y, z - zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y, z - zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x + zd, y, z + xd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - zd, y, z + xd, block, blockData))
-            conn.send("world.setBlock", intFloor(x + zd, y, z - xd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - zd, y, z - xd, block, blockData))
+            conn.send("world.setBlock", intFloor(x + xd, y, z + zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y, z + zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x + xd, y, z - zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y, z - zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x + zd, y, z + xd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - zd, y, z + xd, block, block_data))
+            conn.send("world.setBlock", intFloor(x + zd, y, z - xd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - zd, y, z - xd, block, block_data))
 
 
 def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData = 0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -252,12 +251,12 @@ def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=playe
         x2 = pos.x + x2
         y2 = pos.y + y2
         z2 = pos.z + z2
-    # list for vertices
+    # List for vertices
     vertices = []
-    # if the 2 points are the same, return single vertice
-    if (x1 == x2 and y1 == y2 and z1 == z2):
+    # If the 2 points are the same, return single vertice
+    if x1 == x2 and y1 == y2 and z1 == z2:
         vertices.append(Vec3(x1, y1, z1))
-    # else get all points in edge
+    # Else get all points in edge
     else:
         dx = x2 - x1
         dy = y2 - y1
@@ -271,55 +270,55 @@ def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=playe
         x = x1
         y = y1
         z = z1
-        # x dominant
-        if (ax >= MAX(ay, az)):
+        # X dominant
+        if ax >= MAX(ay, az):
             yd = ay - (ax >> 1)
             zd = az - (ax >> 1)
             loop = True
-            while (loop):
+            while loop:
                 vertices.append(Vec3(x, y, z))
-                if (x == x2):
+                if x == x2:
                     loop = False
-                if (yd >= 0):
+                if yd >= 0:
                     y += sy
                     yd -= ax
-                if (zd >= 0):
+                if zd >= 0:
                     z += sz
                     zd -= ax
                 x += sx
                 yd += ay
                 zd += az
-        # y dominant
-        elif (ay >= MAX(ax, az)):
+        # Y dominant
+        elif ay >= MAX(ax, az):
             xd = ax - (ay >> 1)
             zd = az - (ay >> 1)
             loop = True
-            while (loop):
+            while loop:
                 vertices.append(Vec3(x, y, z))
-                if (y == y2):
+                if y == y2:
                     loop = False
-                if (xd >= 0):
+                if xd >= 0:
                     x += sx
                     xd -= ay
-                if (zd >= 0):
+                if zd >= 0:
                     z += sz
                     zd -= ay
                 y += sy
                 xd += ax
                 zd += az
-        # z dominant
-        elif (az >= MAX(ax, ay)):
+        # Z dominant
+        elif az >= MAX(ax, ay):
             xd = ax - (az >> 1)
             yd = ay - (az >> 1)
             loop = True
-            while (loop):
+            while loop:
                 vertices.append(Vec3(x, y, z))
-                if (z == z2):
+                if z == z2:
                     loop = False
-                if (xd >= 0):
+                if xd >= 0:
                     x += sx
                     xd -= az
-                if (yd >= 0):
+                if yd >= 0:
                     y += sy
                     yd -= az
                 z += sz
@@ -330,30 +329,30 @@ def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=playe
                                              vertex.y,
                                              vertex.z,
                                              block,
-                                             blockData))
+                                             block_data))
 
 
 def block(block, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
         x += pos.x
         y += pos.y
         z += pos.z
-    conn.send("world.setBlock", intFloor(x, y, z, block, blockData))
+    conn.send("world.setBlock", intFloor(x, y, z, block, block_data))
 
 
 def blocks(block, x1=0, y1=0, z1=0, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -363,30 +362,30 @@ def blocks(block, x1=0, y1=0, z1=0, x=0, y=0, z=0, absolute=False, target=player
         x = pos.x + x
         y = pos.y + y
         z = pos.z + z
-    conn.send("world.setBlocks", intFloor(x1, y1, z1, x, y, z, block, blockData))
+    conn.send("world.setBlocks", intFloor(x1, y1, z1, x, y, z, block, block_data))
 
 
 def cube(block, side=10, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
         x += pos.x
         y += pos.y
         z += pos.z
-    conn.send("world.setBlocks", intFloor(x, y, z, x + side - 1, y + side - 1, z + side - 1, block, blockData))
+    conn.send("world.setBlocks", intFloor(x, y, z, x + side - 1, y + side - 1, z + side - 1, block, block_data))
 
 
 def pyramid(block, width=11, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -396,9 +395,9 @@ def pyramid(block, width=11, x=0, y=0, z=0, absolute=False, target=player):
     if width % 2 == 0:
         width += 1
     if width == 1:
-        conn.send("world.setBlock", intFloor(x, y, z, block, blockData))
+        conn.send("world.setBlock", intFloor(x, y, z, block, block_data))
     else:
-        conn.send("world.setBlocks", intFloor(x, y, z, x + width - 1, y, z + width - 1, block, blockData))
+        conn.send("world.setBlocks", intFloor(x, y, z, x + width - 1, y, z + width - 1, block, block_data))
         pyramid(block, width - 2, x + 1, y + 1, z + 1, absolute=True)
 
 
@@ -465,19 +464,8 @@ def readstring(text=""):
         except:
             chat("Il valore inserito non e' valido")
     return value
-#
-#
-# def input_from_chat(text):
-#     chat(text)
-#     readDone = False
-#     value = "0"
-#     while not readDone:
-#         for msg in mc.events.pollChatPosts():
-#             value = msg.message
-#             readDone = True
-#             break
-#         time.sleep(0.10)
-#     return value
+
+
 def input_from_chat(text):
     chat(text)
     read_done = False
@@ -497,10 +485,10 @@ def input_from_chat(text):
 def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", absolute=False, target=player):
     if direction == "horizontal":
         if block is list:
-            blockData = block[1]
+            block_data = block[1]
             block = block[0]
         else:
-            blockData = 0
+            block_data = 0
         if not absolute:
             s = conn.sendReceive("entity" + ".getTile", target)
             pos = Vec3(*map(int, s.split(",")))
@@ -519,13 +507,13 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
             else:
                 targetx = int(round(x + side * math.cos(angle), 0))
                 targetz = int(round(z + side * math.sin(angle), 0))
-            # line starts here:
-            # list for vertices
+            # Line starts here:
+            # List for vertices
             vertices = []
-            # if the 2 points are the same, return single vertice
-            if (x == targetx and y == y and z == targetz):
+            # If the 2 points are the same, return single vertice
+            if x == targetx and y == y and z == targetz:
                 vertices.append(Vec3(x, y, z))
-            # else get all points in edge
+            # Else get all points in edge
             else:
                 dx = targetx - x
                 dy = y - y
@@ -539,55 +527,55 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
                 x = x
                 y = y
                 z = z
-                # x dominant
-                if (ax >= MAX(ay, az)):
+                # X dominant
+                if ax >= MAX(ay, az):
                     yd = ay - (ax >> 1)
                     zd = az - (ax >> 1)
                     loop = True
-                    while (loop):
+                    while loop:
                         vertices.append(Vec3(x, y, z))
-                        if (x == targetx):
+                        if x == targetx:
                             loop = False
-                        if (yd >= 0):
+                        if yd >= 0:
                             y += sy
                             yd -= ax
-                        if (zd >= 0):
+                        if zd >= 0:
                             z += sz
                             zd -= ax
                         x += sx
                         yd += ay
                         zd += az
-                # y dominant
-                elif (ay >= MAX(ax, az)):
+                # Y dominant
+                elif ay >= MAX(ax, az):
                     xd = ax - (ay >> 1)
                     zd = az - (ay >> 1)
                     loop = True
-                    while (loop):
+                    while loop:
                         vertices.append(Vec3(x, y, z))
-                        if (y == y):
+                        if y == y:
                             loop = False
-                        if (xd >= 0):
+                        if xd >= 0:
                             x += sx
                             xd -= ay
-                        if (zd >= 0):
+                        if zd >= 0:
                             z += sz
                             zd -= ay
                         y += sy
                         xd += ax
                         zd += az
-                # z dominant
-                elif (az >= MAX(ax, ay)):
+                # Z dominant
+                elif az >= MAX(ax, ay):
                     xd = ax - (az >> 1)
                     yd = ay - (az >> 1)
                     loop = True
-                    while (loop):
+                    while loop:
                         vertices.append(Vec3(x, y, z))
-                        if (z == targetz):
+                        if z == targetz:
                             loop = False
-                        if (xd >= 0):
+                        if xd >= 0:
                             x += sx
                             xd -= az
-                        if (yd >= 0):
+                        if yd >= 0:
                             y += sy
                             yd -= az
                         z += sz
@@ -598,21 +586,13 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
                                                      vertex.y,
                                                      vertex.z,
                                                      block,
-                                                     blockData))
+                                                     block_data))
             # line(block, x, y, z, targetx, y, targetz)
             angle += 2 * math.pi / shape
             x = targetx
             z = targetz
             i -= 1
 
-
-# def turtle(block, target=player):
-#     s = conn.sendReceive("entity" + ".getTile", target)
-#     pos = Vec3(*map(int, s.split(",")))
-#     turtle = MinecraftTurtle(conn, pos, player)
-#     turtle.penblock(block)
-#     turtle.speed(10)
-#     return turtle
 
 def turtle(penblock, target=player):
     chat('Remember that class names should be Capital Letter (Turtle, not turtle)!')
@@ -674,10 +654,7 @@ def maze(csvpath, base=grass, wall=gold, obstacle=lava, target=player):
 #chatl = chatListener()
 
 
-
-
-#TURTLE
-
+# TURTLE CLASS
 class Turtle:
 
     SPEEDTIMES = {0: 0,
