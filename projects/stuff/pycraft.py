@@ -1,11 +1,3 @@
-#inizializzo
-# import mcpi.minecraft as minecraft
-# import mcpi.minecraftstuff as minecraftstuff
-# import mcpi.minecraftturtle as mt
-# mc = minecraft.connection
-# mcdrawing = minecraftstuff.MinecraftDrawing(mc)
-
-# initialize
 import time, random, math, os
 import mcpi.connection
 import mcpi.blockslist as bl
@@ -13,13 +5,13 @@ from mcpi.util import *
 from mcpi.event import *
 conn = mcpi.connection.Connection("localhost", 4711)
 
-# find the player
-#players = mc.getPlayerEntityIds()
+# Find the player
+# players = mc.getPlayerEntityIds()
 ids = conn.sendReceive("world.getPlayerIds")
 players = map(int, ids.split("|"))
 player = players[0]
 
-#BLOCKS
+# BLOCKS
 air = bl.AIR.id
 stone = bl.STONE.id
 grass = bl.GRASS.id
@@ -126,32 +118,17 @@ emerald = bl.EMERALD_BLOCK.id
 emerald_ore = bl.EMERALD_ORE.id
 quartz = bl.QUARTZ_BLOCK.id
 barrier = bl.BARRIER.id
-###############################################################
 
 
-#################################################################
-
-
-# def chat(text):
-#     mc.postToChat(text)
 def chat(text):
     conn.send("chat.post", text)
 
 
-# def where(target=player):
-#     return mc.entity.getTilePos(target)
 def where(target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     return Vec3(*map(int, s.split(",")))
 
 
-# def move(x=0, y=0, z=0, target=player, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         x += pos.x
-#         y += pos.y
-#         z += pos.z
-#     mc.entity.setTilePos(target, x, y, z)
 def move(x=0, y=0, z=0, target=player, absolute=False):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
@@ -160,24 +137,14 @@ def move(x=0, y=0, z=0, target=player, absolute=False):
         y += pos.y
         z += pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
-#
-#
-# def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         x += pos.x
-#         y += pos.y
-#         z += pos.z
-#     if not hollow:
-#         mcdrawing.drawSphere(x, y, z, radius, block)
-#     else:
-#         mcdrawing.drawHollowSphere(x, y, z, radius, block)
+
+
 def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -189,29 +156,15 @@ def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False, target
             for yd in range(radius * -1, radius):
                 for zd in range(radius * -1, radius):
                     if xd ** 2 + yd ** 2 + zd ** 2 < radius ** 2:
-                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, blockData))
+                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, block_data))
     else:
         for xd in range(radius * -1, radius):
             for yd in range(radius * -1, radius):
                 for zd in range(radius * -1, radius):
                     if (xd ** 2 + yd ** 2 + zd ** 2 < radius ** 2) and (xd ** 2 + yd ** 2 + zd ** 2 > (radius ** 2 - (radius * 2))):
-                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, blockData))
-#
-#
-# def circle(block,
-#            radius=10,
-#            x=0, y=0, z=0,
-#            direction="vertical",
-#            absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         x += pos.x
-#         y += pos.y
-#         z += pos.z
-#     if direction == "vertical":
-#         mcdrawing.drawCircle(x, y, z, radius, block)
-#     elif direction == "horizontal":
-#         mcdrawing.drawHorizontalCircle(x, y, z, radius, block)
+                        conn.send("world.setBlock", intFloor(x + xd, y + yd, z + zd, block, block_data))
+
+
 def circle(block,
            radius=10,
            x=0, y=0, z=0,
@@ -219,10 +172,10 @@ def circle(block,
            absolute=False,
            target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -235,10 +188,10 @@ def circle(block,
         ddf_y = -2 * radius
         xd = 0
         yd = radius
-        conn.send("world.setBlock", intFloor(x, y + radius, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x, y - radius, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x + radius, y, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x - radius, y, z, block, blockData))
+        conn.send("world.setBlock", intFloor(x, y + radius, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x, y - radius, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x + radius, y, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x - radius, y, z, block, block_data))
         while xd < yd:
             if f >= 0:
                 yd -= 1
@@ -247,25 +200,24 @@ def circle(block,
             xd += 1
             ddf_x += 2
             f += ddf_x
-            conn.send("world.setBlock", intFloor(x + xd, y + yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y + yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x + xd, y - yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y - yd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x + yd, y + xd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - yd, y + xd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x + yd, y - xd, z, block, blockData))
-            conn.send("world.setBlock", intFloor(x - yd, y - xd, z, block, blockData))
+            conn.send("world.setBlock", intFloor(x + xd, y + yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y + yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x + xd, y - yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y - yd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x + yd, y + xd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - yd, y + xd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x + yd, y - xd, z, block, block_data))
+            conn.send("world.setBlock", intFloor(x - yd, y - xd, z, block, block_data))
     elif direction == "horizontal":
         f = 1 - radius
         ddf_x = 1
         ddf_z = -2 * radius
         xd = 0
         zd = radius
-        conn.send("world.setBlock", intFloor(x, y, z + radius, block, blockData))
-        conn.send("world.setBlock", intFloor(x, y, z - radius, block, blockData))
-        conn.send("world.setBlock", intFloor(x + radius, y, z, block, blockData))
-        conn.send("world.setBlock", intFloor(x - radius, y, z, block, blockData))
-
+        conn.send("world.setBlock", intFloor(x, y, z + radius, block, block_data))
+        conn.send("world.setBlock", intFloor(x, y, z - radius, block, block_data))
+        conn.send("world.setBlock", intFloor(x + radius, y, z, block, block_data))
+        conn.send("world.setBlock", intFloor(x - radius, y, z, block, block_data))
         while xd < zd:
             if f >= 0:
                 zd -= 1
@@ -274,34 +226,22 @@ def circle(block,
             xd += 1
             ddf_x += 2
             f += ddf_x
-            conn.send("world.setBlock", intFloor(x + xd, y, z + zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y, z + zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x + xd, y, z - zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - xd, y, z - zd, block, blockData))
-            conn.send("world.setBlock", intFloor(x + zd, y, z + xd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - zd, y, z + xd, block, blockData))
-            conn.send("world.setBlock", intFloor(x + zd, y, z - xd, block, blockData))
-            conn.send("world.setBlock", intFloor(x - zd, y, z - xd, block, blockData))
-#
-#
-# def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         mcdrawing.drawLine(pos.x,
-#                            pos.y,
-#                            pos.z,
-#                            pos.x + x1,
-#                            pos.y + y1,
-#                            pos.z + z1,
-#                            block)
-#     else:
-#         mcdrawing.drawLine(x1, y1, z1, x2, y2, z2, block)
+            conn.send("world.setBlock", intFloor(x + xd, y, z + zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y, z + zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x + xd, y, z - zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - xd, y, z - zd, block, block_data))
+            conn.send("world.setBlock", intFloor(x + zd, y, z + xd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - zd, y, z + xd, block, block_data))
+            conn.send("world.setBlock", intFloor(x + zd, y, z - xd, block, block_data))
+            conn.send("world.setBlock", intFloor(x - zd, y, z - xd, block, block_data))
+
+
 def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData = 0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -311,12 +251,12 @@ def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=playe
         x2 = pos.x + x2
         y2 = pos.y + y2
         z2 = pos.z + z2
-    # list for vertices
+    # List for vertices
     vertices = []
-    # if the 2 points are the same, return single vertice
-    if (x1 == x2 and y1 == y2 and z1 == z2):
+    # If the 2 points are the same, return single vertice
+    if x1 == x2 and y1 == y2 and z1 == z2:
         vertices.append(Vec3(x1, y1, z1))
-    # else get all points in edge
+    # Else get all points in edge
     else:
         dx = x2 - x1
         dy = y2 - y1
@@ -330,55 +270,55 @@ def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=playe
         x = x1
         y = y1
         z = z1
-        # x dominant
-        if (ax >= MAX(ay, az)):
+        # X dominant
+        if ax >= MAX(ay, az):
             yd = ay - (ax >> 1)
             zd = az - (ax >> 1)
             loop = True
-            while (loop):
+            while loop:
                 vertices.append(Vec3(x, y, z))
-                if (x == x2):
+                if x == x2:
                     loop = False
-                if (yd >= 0):
+                if yd >= 0:
                     y += sy
                     yd -= ax
-                if (zd >= 0):
+                if zd >= 0:
                     z += sz
                     zd -= ax
                 x += sx
                 yd += ay
                 zd += az
-        # y dominant
-        elif (ay >= MAX(ax, az)):
+        # Y dominant
+        elif ay >= MAX(ax, az):
             xd = ax - (ay >> 1)
             zd = az - (ay >> 1)
             loop = True
-            while (loop):
+            while loop:
                 vertices.append(Vec3(x, y, z))
-                if (y == y2):
+                if y == y2:
                     loop = False
-                if (xd >= 0):
+                if xd >= 0:
                     x += sx
                     xd -= ay
-                if (zd >= 0):
+                if zd >= 0:
                     z += sz
                     zd -= ay
                 y += sy
                 xd += ax
                 zd += az
-        # z dominant
-        elif (az >= MAX(ax, ay)):
+        # Z dominant
+        elif az >= MAX(ax, ay):
             xd = ax - (az >> 1)
             yd = ay - (az >> 1)
             loop = True
-            while (loop):
+            while loop:
                 vertices.append(Vec3(x, y, z))
-                if (z == z2):
+                if z == z2:
                     loop = False
-                if (xd >= 0):
+                if xd >= 0:
                     x += sx
                     xd -= az
-                if (yd >= 0):
+                if yd >= 0:
                     y += sy
                     yd -= az
                 z += sz
@@ -389,49 +329,30 @@ def line(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False, target=playe
                                              vertex.y,
                                              vertex.z,
                                              block,
-                                             blockData))
-#
-#
-# def block(block, x=0, y=0, z=0, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         x += pos.x
-#         y += pos.y
-#         z += pos.z
-#     mc.setBlock(x, y, z, block)
+                                             block_data))
+
+
 def block(block, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
         x += pos.x
         y += pos.y
         z += pos.z
-    conn.send("world.setBlock", intFloor(x, y, z, block, blockData))
-#
-#
-# def blocks(block, x1=0, y1=0, z1=0, x2=0, y2=0, z2=0, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         mc.setBlocks(pos.x,
-#                      pos.y,
-#                      pos.z,
-#                      pos.x + x1,
-#                      pos.y + y1,
-#                      pos.z + z1,
-#                      block)
-#     else:
-#         mc.setBlocks(x1, y1, z1, x2, y2, z2, block)
+    conn.send("world.setBlock", intFloor(x, y, z, block, block_data))
+
+
 def blocks(block, x1=0, y1=0, z1=0, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -441,50 +362,30 @@ def blocks(block, x1=0, y1=0, z1=0, x=0, y=0, z=0, absolute=False, target=player
         x = pos.x + x
         y = pos.y + y
         z = pos.z + z
-    conn.send("world.setBlocks", intFloor(x1, y1, z1, x, y, z, block, blockData))
-#
-#
-# def cube(block, side=10, x=0, y=0, z=0, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         x += pos.x
-#         y += pos.y
-#         z += pos.z
-#     mc.setBlocks(x, y, z, x + side - 1, y + side - 1, z + side - 1, block)
+    conn.send("world.setBlocks", intFloor(x1, y1, z1, x, y, z, block, block_data))
+
+
 def cube(block, side=10, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
         x += pos.x
         y += pos.y
         z += pos.z
-    conn.send("world.setBlocks", intFloor(x, y, z, x + side - 1, y + side - 1, z + side - 1, block, blockData))
-#
-#
-# def pyramid(block, width=10, x=0, y=0, z=0, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if width % 2 == 0:
-#         width += 1
-#     if not absolute:
-#         x = x + pos.x
-#         y = y + pos.y
-#         z = z + pos.z
-#     if width == 1:
-#         mc.setBlock(x, y, z, block)
-#     else:
-#         mc.setBlocks(x, y, z, x + width - 1, y, z + width - 1, block)
-#         pyramid(block, width - 2, x + 1, y + 1, z + 1, absolute=True)
+    conn.send("world.setBlocks", intFloor(x, y, z, x + side - 1, y + side - 1, z + side - 1, block, block_data))
+
+
 def pyramid(block, width=11, x=0, y=0, z=0, absolute=False, target=player):
     if block is list:
-        blockData = block[1]
+        block_data = block[1]
         block = block[0]
     else:
-        blockData=0
+        block_data = 0
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
         pos = Vec3(*map(int, s.split(",")))
@@ -494,48 +395,27 @@ def pyramid(block, width=11, x=0, y=0, z=0, absolute=False, target=player):
     if width % 2 == 0:
         width += 1
     if width == 1:
-        conn.send("world.setBlock", intFloor(x, y, z, block, blockData))
+        conn.send("world.setBlock", intFloor(x, y, z, block, block_data))
     else:
-        conn.send("world.setBlocks", intFloor(x, y, z, x + width - 1, y, z + width - 1, block, blockData))
+        conn.send("world.setBlocks", intFloor(x, y, z, x + width - 1, y, z + width - 1, block, block_data))
         pyramid(block, width - 2, x + 1, y + 1, z + 1, absolute=True)
-#
-#
-# def over(block, target=player):
-#     pos = mc.entity.getTilePos(player)
-#     material = mc.getBlock(pos.x,
-#                            pos.y - 1,
-#                            pos.z)
-#     if material == block:
-#         return True
+
+
 def over(block, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
     material = int(conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z)))
     if material == block:
         return True
-#
-#
-# def under(target=player):
-#     pos = mc.entity.getTilePos(player)
-#     material = mc.getBlock(pos.x,
-#                            pos.y - 1,
-#                            pos.z)
-#     return material
+
+
 def under(target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
     material = conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z))
     return material
-#
-#
-# def what(x, y, z, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     if not absolute:
-#         x += pos.x
-#         y += pos.y
-#         z += pos.z
-#     material = mc.getBlock(x, y, z)
-#     return material
+
+
 def what(x, y, z, absolute=False, target=player):
     if not absolute:
         s = conn.sendReceive("entity" + ".getTile", target)
@@ -545,20 +425,8 @@ def what(x, y, z, absolute=False, target=player):
         z += pos.z
     material = conn.sendReceive("world.getBlock", intFloor(x, y, z))
     return material
-#
-#
-# def near(block, radius=10):
-#     pos = mc.entity.getTilePos(player)
-#     #return mcdrawing.getInSphere(block, radius, pos)
-#     blocks = mc.getBlocks(pos.x - radius,
-#                           pos.y - radius,
-#                           pos.z - radius,
-#                           pos.x + radius,
-#                           pos.y + radius,
-#                           pos.z + radius)
-#     for b in blocks:
-#         if b == block:
-#             return True
+
+
 def near(block, radius=10, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
@@ -572,109 +440,55 @@ def near(block, radius=10, target=player):
     for b in blocks:
         if b == block:
             return True
-#
-#
-# def readnumber(text):
-#     done = False
-#     value = 0
-#     while not done:
-#         try:
-#             value = int(inputFromChat(text))
-#             done = True
-#         except:
-#             chat("Il valore inserito non e' un numero valido")
-#     return value
+
+
 def readnumber(text=""):
     done = False
     value = 0
     while not done:
         try:
-            value = int(inputFromChat(text))
+            value = int(input_from_chat(text))
             done = True
         except:
             chat("Il valore inserito non e' un numero valido")
     return value
-#
-#
-# def readstring(text):
-#     done = False
-#     value = 0
-#     while not done:
-#         try:
-#             value = inputFromChat(text)
-#             done = True
-#         except:
-#             chat("Il valore inserito non e' valido")
-#     return value
+
+
 def readstring(text=""):
     done = False
     value = 0
     while not done:
         try:
-            value = inputFromChat(text)
+            value = input_from_chat(text)
             done = True
         except:
             chat("Il valore inserito non e' valido")
     return value
-#
-#
-# def inputFromChat(text):
-#     chat(text)
-#     readDone = False
-#     value = "0"
-#     while not readDone:
-#         for msg in mc.events.pollChatPosts():
-#             value = msg.message
-#             readDone = True
-#             break
-#         time.sleep(0.10)
-#     return value
-def inputFromChat(text):
+
+
+def input_from_chat(text):
     chat(text)
-    readDone = False
+    read_done = False
     value = "0"
-    while not readDone:
+    while not read_done:
         s = conn.sendReceive("events.chat.posts")
         events = [e for e in s.split("|") if e]
         poll = [ChatEvent.Post(int(e[:e.find(",")]), e[e.find(",") + 1:]) for e in events]
         for msg in poll:
             value = msg.message
-            readDone = True
+            read_done = True
             break
         time.sleep(0.10)
     return value
-#
-#
-# def polygon(block, shape=6, side=10, x=0, y=0, z=0, absolute=False):
-#     pos = mc.entity.getTilePos(player)
-#     angle = 0
-#     i = shape
-#     side -= 1
-#     if not absolute:
-#         x = x + pos.x
-#         y = y + pos.y
-#         z = z + pos.z
-#     startx = x
-#     startz = z
-#     while i > 0:
-#         if i == 1:
-#             targetx = startx
-#             targetz = startz
-#         else:
-#             targetx = int(round(x + side * math.cos(angle), 0))
-#             targetz = int(round(z + side * math.sin(angle), 0))
-#         mcdrawing.drawLine(x, y, z, targetx, y, targetz, block)
-#         angle += 2 * math.pi / shape
-#         x = targetx
-#         z = targetz
-#         i -= 1
+
+
 def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", absolute=False, target=player):
     if direction == "horizontal":
         if block is list:
-            blockData = block[1]
+            block_data = block[1]
             block = block[0]
         else:
-            blockData = 0
+            block_data = 0
         if not absolute:
             s = conn.sendReceive("entity" + ".getTile", target)
             pos = Vec3(*map(int, s.split(",")))
@@ -693,13 +507,13 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
             else:
                 targetx = int(round(x + side * math.cos(angle), 0))
                 targetz = int(round(z + side * math.sin(angle), 0))
-            # line starts here:
-            # list for vertices
+            # Line starts here:
+            # List for vertices
             vertices = []
-            # if the 2 points are the same, return single vertice
-            if (x == targetx and y == y and z == targetz):
+            # If the 2 points are the same, return single vertice
+            if x == targetx and y == y and z == targetz:
                 vertices.append(Vec3(x, y, z))
-            # else get all points in edge
+            # Else get all points in edge
             else:
                 dx = targetx - x
                 dy = y - y
@@ -713,55 +527,55 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
                 x = x
                 y = y
                 z = z
-                # x dominant
-                if (ax >= MAX(ay, az)):
+                # X dominant
+                if ax >= MAX(ay, az):
                     yd = ay - (ax >> 1)
                     zd = az - (ax >> 1)
                     loop = True
-                    while (loop):
+                    while loop:
                         vertices.append(Vec3(x, y, z))
-                        if (x == targetx):
+                        if x == targetx:
                             loop = False
-                        if (yd >= 0):
+                        if yd >= 0:
                             y += sy
                             yd -= ax
-                        if (zd >= 0):
+                        if zd >= 0:
                             z += sz
                             zd -= ax
                         x += sx
                         yd += ay
                         zd += az
-                # y dominant
-                elif (ay >= MAX(ax, az)):
+                # Y dominant
+                elif ay >= MAX(ax, az):
                     xd = ax - (ay >> 1)
                     zd = az - (ay >> 1)
                     loop = True
-                    while (loop):
+                    while loop:
                         vertices.append(Vec3(x, y, z))
-                        if (y == y):
+                        if y == y:
                             loop = False
-                        if (xd >= 0):
+                        if xd >= 0:
                             x += sx
                             xd -= ay
-                        if (zd >= 0):
+                        if zd >= 0:
                             z += sz
                             zd -= ay
                         y += sy
                         xd += ax
                         zd += az
-                # z dominant
-                elif (az >= MAX(ax, ay)):
+                # Z dominant
+                elif az >= MAX(ax, ay):
                     xd = ax - (az >> 1)
                     yd = ay - (az >> 1)
                     loop = True
-                    while (loop):
+                    while loop:
                         vertices.append(Vec3(x, y, z))
-                        if (z == targetz):
+                        if z == targetz:
                             loop = False
-                        if (xd >= 0):
+                        if xd >= 0:
                             x += sx
                             xd -= az
-                        if (yd >= 0):
+                        if yd >= 0:
                             y += sy
                             yd -= az
                         z += sz
@@ -772,21 +586,13 @@ def polygon(block, shape=6, side=10, x=0, y=0, z=0, direction="horizontal", abso
                                                      vertex.y,
                                                      vertex.z,
                                                      block,
-                                                     blockData))
+                                                     block_data))
             # line(block, x, y, z, targetx, y, targetz)
             angle += 2 * math.pi / shape
             x = targetx
             z = targetz
             i -= 1
 
-
-# def turtle(block, target=player):
-#     s = conn.sendReceive("entity" + ".getTile", target)
-#     pos = Vec3(*map(int, s.split(",")))
-#     turtle = MinecraftTurtle(conn, pos, player)
-#     turtle.penblock(block)
-#     turtle.speed(10)
-#     return turtle
 
 def turtle(penblock, target=player):
     chat('Remember that class names should be Capital Letter (Turtle, not turtle)!')
@@ -848,10 +654,7 @@ def maze(csvpath, base=grass, wall=gold, obstacle=lava, target=player):
 #chatl = chatListener()
 
 
-
-
-#TURTLE
-
+# TURTLE CLASS
 class Turtle:
 
     SPEEDTIMES = {0: 0,
@@ -869,224 +672,265 @@ class Turtle:
                   1: 1}
 
     def __init__(self, penblock, target=player):
-        # set defaults
+        # Player
         self.player = player
-        # start position
+        # Start position
         s = conn.sendReceive("entity" + ".getTile", target)
         self.startposition = Vec3(*map(int, s.split(",")))
-        # set turtle position
+        # Set turtle position
         self.position = Vec3(*map(int, s.split(",")))
-        # set turtle angles
+        # Set turtle angles
         self.heading = 0
         self.verticalheading = 0
-        # set pen down
+        # Set pen down
         self._pendown = True
-        # set pen bl to black wool
+        # Set pen bl to black wool
         self._penblock = bl.Block(bl.WOOL.id, 15)
-        # flying to true
+        # Flying to true
         self.flying = True
-        # set speed
+        # Set speed
         self.turtlespeed = 6
-        # create turtle
+        # Create turtle
         self.showturtle = True
-        # set turtle bl
+        # Set turtle block
         self.turtleblock = bl.Block(bl.DIAMOND_BLOCK.id)
-        # draw turtle
-        self._drawTurtle(int(self.position.x), int(self.position.y), int(self.position.y))
-        # previous vertical heading
+        # Draw turtle
+        self.draw_turtle(int(self.position.x), int(self.position.y), int(self.position.y))
+        # Previous vertical heading
         self.previous = 0
-        # last turtle
-        self.lastDrawnTurtle = Vec3(0, 0, 0)
+        # Last turtle
+        self.last_drawn_turtle = Vec3(0, 0, 0)
+        # Pen block
         self.penblock(penblock)
+        # Speed
         self.speed(10)
 
     def forward(self, distance):
-        #get end of line
-        #x,y,z = self._findTargetBlock(self.position.x, self.position.y, self.position.z, self.heading, self.verticalheading, distance)
-        x,y,z = self._findPointOnSphere(self.position.x, self.position.y, self.position.z, self.heading, self.verticalheading, distance)
-        #move turtle forward
-        self._moveTurtle(x,y,z)
+        # Get end of line
+        x, y, z = self.find_point_on_sphere(self.position.x,
+                                            self.position.y,
+                                            self.position.z,
+                                            self.heading,
+                                            self.verticalheading,
+                                            distance)
+        # Move turtle forward
+        self.move_turtle(x, y, z)
 
     def backward(self, distance):
-        #move turtle backward
-        #get end of line
-        #x,y,z = self._findTargetBlock(self.position.x, self.position.y, self.position.z, self.heading, self.verticalheading - 180, distance)
-        x,y,z = self._findPointOnSphere(self.position.x, self.position.y, self.position.z, self.heading, self.verticalheading - 180, distance)
-        #move turtle forward
-        self._moveTurtle(x,y,z)
+        # Get end of line
+        x, y, z = self.find_point_on_sphere(self.position.x,
+                                            self.position.y,
+                                            self.position.z,
+                                            self.heading,
+                                            self.verticalheading - 180,
+                                            distance)
+        # Move turtle forward
+        self.move_turtle(x, y, z)
 
-    def _moveTurtle(self,x,y,z):
-        #get blocks between current position and next
-        targetX, targetY, targetZ = int(x), int(y), int(z)
-        #if walking, set target Y to be height of world
-        if self.flying == False: targetY = int(conn.sendReceive(targetX, targetZ))
-        currentX, currentY, currentZ = int(self.position.x), int(self.position.y), int(self.position.z)
-
-
-        #clear the turtle
-        if self.showturtle: self._clearTurtle(self.lastDrawnTurtle.x, self.lastDrawnTurtle.y, self.lastDrawnTurtle.z)
-
-        #if speed is 0 and flying, just draw the line, else animate it
+    def move_turtle(self, x, y, z):
+        # Get blocks between current position and next
+        target_x, target_y, target_z = int(x), int(y), int(z)
+        # If walking, set target Y to be height of world
+        if self.flying is False:
+            target_y = int(conn.sendReceive(target_x, target_z))
+        current_x, current_y, current_z = int(self.position.x), int(self.position.y), int(self.position.z)
+        # Clear the turtle
+        if self.showturtle:
+            self.clear_turtle(self.last_drawn_turtle.x, self.last_drawn_turtle.y, self.last_drawn_turtle.z)
+        # If speed is 0 and flying, just draw the line, else animate it
         if self.turtlespeed == 0 and self.flying:
-            #draw the line
-            if self._pendown: line(self._penblock.id, currentX, currentY - 1, currentZ, targetX, targetY - 1, targetZ)
+            # Draw the line
+            if self._pendown:
+                line(self._penblock.id, current_x, current_y - 1, current_z, target_x, target_y - 1, target_z)
         else:
-            blocksBetween = getLine(currentX, currentY, currentZ, targetX, targetY, targetZ)
-            #print "ciao:  "
-            #print blocksBetween
-            if self.verticalheading > 215 and self.verticalheading < 315:
+            blocks_between = getLine(current_x, current_y, current_z, target_x, target_y, target_z)
+            if 215 < self.verticalheading < 315:
                 self.previous = -1
-                for blockBetween in blocksBetween:
-                    #if walking update the y, to be the height of the world
-                    if self.flying == False: blockBetween.y = int(conn.sendReceive(blockBetween.x, blockBetween.z))
-                    #check the material on the new turtle position
-                    #replace = self.mc.getBlock(blockBetween.x, blockBetween.y, blockBetween.z)
-                    #draw the turtle
-                    if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
-                    #draw the pen
-                    if self._pendown: conn.send("world.setBlock", intFloor(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data))
-                    #wait
+                for block_between in blocks_between:
+                    # If walking update the y, to be the height of the world
+                    if self.flying is False:
+                        block_between.y = int(conn.sendReceive(block_between.x, block_between.z))
+                    # Draw the turtle
+                    if self.showturtle:
+                        self.draw_turtle(block_between.x, block_between.y - 2, block_between.z)
+                    # Draw the pen
+                    if self._pendown:
+                        conn.send("world.setBlock", intFloor(block_between.x,
+                                                             block_between.y - 1,
+                                                             block_between.z,
+                                                             self._penblock.id,
+                                                             self._penblock.data))
+                    # Wait
                     time.sleep(self.SPEEDTIMES[self.turtlespeed])
-                    #clear the turtle
-                    if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
-                #update turtle's position to be the target
-                self.position.x, self.position.y, self.position.z = x,y,z
-                #draw turtle
-                if self.showturtle: self._drawTurtle(targetX, targetY - 2, targetZ)
-            elif self.verticalheading > 45 and self.verticalheading < 135:
+                    # Clear the turtle
+                    if self.showturtle:
+                        self.clear_turtle(block_between.x, block_between.y - 2, block_between.z)
+                # Update turtle's position to be the target
+                self.position.x, self.position.y, self.position.z = x, y, z
+                # Draw turtle
+                if self.showturtle:
+                    self.draw_turtle(target_x, target_y - 2, target_z)
+            elif 45 < self.verticalheading < 135:
                 self.previous = 1
-                for blockBetween in blocksBetween:
-                    #print blockBetween
-                    #if walking update the y, to be the height of the world
-                    if self.flying == False: blockBetween.y = int(conn.sendReceive(blockBetween.x, blockBetween.z))
-                    #draw the turtle
-                    if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
-                    #draw the pen
-                    if self._pendown: conn.send("world.setBlock", intFloor(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data))
-                    #wait
+                for block_between in blocks_between:
+                    # If walking update the y, to be the height of the world
+                    if self.flying is False:
+                        block_between.y = int(conn.sendReceive(block_between.x, block_between.z))
+                    # Draw the turtle
+                    if self.showturtle:
+                        self.draw_turtle(block_between.x, block_between.y, block_between.z)
+                    # Draw the pen
+                    if self._pendown:
+                        conn.send("world.setBlock", intFloor(block_between.x,
+                                                             block_between.y - 1,
+                                                             block_between.z,
+                                                             self._penblock.id,
+                                                             self._penblock.data))
+                    # Wait
                     time.sleep(self.SPEEDTIMES[self.turtlespeed])
-                    #clear the turtle
-                    if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
-                #update turtle's position to be the target
-                self.position.x, self.position.y, self.position.z = x,y,z
-                #draw turtle
-                if self.showturtle: self._drawTurtle(targetX, targetY, targetZ)
+                    # Clear the turtle
+                    if self.showturtle:
+                        self.clear_turtle(block_between.x, block_between.y, block_between.z)
+                # Update turtle's position to be the target
+                self.position.x, self.position.y, self.position.z = x, y, z
+                # Draw turtle
+                if self.showturtle:
+                    self.draw_turtle(target_x, target_y, target_z)
             else:
                 if self.previous == -1:
-                    for blockBetween in blocksBetween:
-                        #print blockBetween
-                        #if walking update the y, to be the height of the world
-                        if self.flying == False: blockBetween.y = int(conn.sendReceive(blockBetween.x, blockBetween.z))
-                        #draw the turtle
-                        if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
-                        if self._pendown: conn.send("world.setBlock", intFloor(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data))
+                    for block_between in blocks_between:
+                        # If walking update the y, to be the height of the world
+                        if self.flying is False:
+                            block_between.y = int(conn.sendReceive(block_between.x, block_between.z))
+                        # Draw the turtle
+                        if self.showturtle:
+                            self.draw_turtle(block_between.x, block_between.y - 2, block_between.z)
+                        if self._pendown:
+                            conn.send("world.setBlock", intFloor(block_between.x,
+                                                                 block_between.y - 1,
+                                                                 block_between.z,
+                                                                 self._penblock.id,
+                                                                 self._penblock.data))
                         time.sleep(self.SPEEDTIMES[self.turtlespeed])
-                        if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y-2, blockBetween.z)
-                        #self.mc.postToChat(-self.verticalheading)
-                    #update turtle's position to be the target
-                    self.position.x, self.position.y, self.position.z = x,y,z
-                    #draw turtle
-                    if self.showturtle: self._drawTurtle(targetX, targetY - 2, targetZ)
+                        if self.showturtle:
+                            self.clear_turtle(block_between.x, block_between.y - 2, block_between.z)
+                    # Update turtle's position to be the target
+                    self.position.x, self.position.y, self.position.z = x, y, z
+                    # Draw turtle
+                    if self.showturtle:
+                        self.draw_turtle(target_x, target_y - 2, target_z)
                 else:
-                    for blockBetween in blocksBetween:
-                        #print blockBetween
-                        #if walking update the y, to be the height of the world
-                        if self.flying == False: blockBetween.y = int(conn.sendReceive(blockBetween.x, blockBetween.z))
-                        #draw the turtle
-                        if self.showturtle: self._drawTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
-                        if self._pendown: conn.send("world.setBlock", intFloor(blockBetween.x, blockBetween.y - 1, blockBetween.z, self._penblock.id, self._penblock.data))
+                    for block_between in blocks_between:
+                        # If walking update the y, to be the height of the world
+                        if self.flying is False:
+                            block_between.y = int(conn.sendReceive(block_between.x, block_between.z))
+                        # Draw the turtle
+                        if self.showturtle:
+                            self.draw_turtle(block_between.x, block_between.y, block_between.z)
+                        if self._pendown:
+                            conn.send("world.setBlock", intFloor(block_between.x,
+                                                                 block_between.y - 1,
+                                                                 block_between.z,
+                                                                 self._penblock.id,
+                                                                 self._penblock.data))
                         time.sleep(self.SPEEDTIMES[self.turtlespeed])
-                        if self.showturtle: self._clearTurtle(blockBetween.x, blockBetween.y, blockBetween.z)
-                        #self.mc.postToChat(self.verticalheading)
-                    #update turtle's position to be the target
-                    self.position.x, self.position.y, self.position.z = x,y,z
-                    #draw turtle
-                    if self.showturtle: self._drawTurtle(targetX, targetY, targetZ)
+                        if self.showturtle:
+                            self.clear_turtle(block_between.x, block_between.y, block_between.z)
+                    # Update turtle's position to be the target
+                    self.position.x, self.position.y, self.position.z = x, y, z
+                    # Draw turtle
+                    if self.showturtle:
+                        self.draw_turtle(target_x, target_y, target_z)
                 self.previous = 0
 
-
     def right(self, angle):
-        #rotate turtle angle to the right
+        # Rotate turtle angle to the right
         self.heading = self.heading + angle
         if self.heading > 360:
             self.heading = self.heading - 360
 
     def left(self, angle):
-        #rotate turtle angle to the left
+        # Rotate turtle angle to the left
         self.heading = self.heading - angle
         if self.heading < 0:
             self.heading = self.heading + 360
 
     def up(self, angle):
-        #rotate turtle angle up
+        # Rotate turtle angle up
         self.verticalheading = self.verticalheading + angle
         if self.verticalheading > 360:
             self.verticalheading = self.verticalheading - 360
-        #turn flying on
-        if self.flying == False: self.flying = True
+        # Turn flying on
+        if self.flying is False:
+            self.flying = True
 
     def down(self, angle):
-        #rotate turtle angle down
+        # Rotate turtle angle down
         self.verticalheading = self.verticalheading - angle
         if self.verticalheading < 0:
             self.verticalheading = self.verticalheading + 360
-        #turn flying on
-        if self.flying == False: self.flying = True
+        # Turn flying on
+        if self.flying is False:
+            self.flying = True
 
     def setx(self, x):
-        self.setposition(x, self.position.y, self.position.z)
+        self.goto(x, self.position.y, self.position.z)
 
     def sety(self, y):
-        self.setposition(self.position.x, y, self.position.z)
+        self.goto(self.position.x, y, self.position.z)
 
     def setz(self, z):
-        self.setposition(self.position.x, self.position.y, z)
+        self.goto(self.position.x, self.position.y, z)
 
-    def setposition(self, x=0, y=0, z=0, absolute=False):
+    def goto(self, x=0, y=0, z=0, absolute=False):
         if not absolute:
             pos = where(player)
-            #clear the turtle
+            # Clear the turtle
             if self.showturtle:
-                self._clearTurtle(self.position.x,
+                self.clear_turtle(self.position.x,
                                   self.position.y,
                                   self.position.z)
-            #update the position
+            # Update the position
             self.position.x = pos.x + x
             self.position.y = pos.y + y
             self.position.z = pos.z + z
-            #draw the turtle
+            # Draw the turtle
             if self.showturtle:
-                self._drawTurtle(self.position.x,
+                self.draw_turtle(self.position.x,
                                  self.position.y,
                                  self.position.z)
         else:
-            #clear the turtle
+            # Clear the turtle
             if self.showturtle:
-                self._clearTurtle(self.position.x,
+                self.clear_turtle(self.position.x,
                                   self.position.y,
                                   self.position.z)
-            #update the position
+            # Update the position
             self.position.x = x
             self.position.y = y
             self.position.z = z
-            #draw the turtle
+            # Draw the turtle
             if self.showturtle:
-                self._drawTurtle(self.position.x,
+                self.draw_turtle(self.position.x,
                                  self.position.y,
                                  self.position.z)
+
+    def setposition(self, x=0, y=0, z=0, absolute=False):
+        self.goto(x, y, z, absolute)
 
     def setheading(self, angle):
         self.heading = angle
 
     def setverticalheading(self, angle):
         self.verticalheading = angle
-        #turn flying on
-        if self.flying == False: self.flying = True
+        # Turn flying on
+        if self.flying is False:
+            self.flying = True
 
-    #def home(self):
-        #self.position.x = startposition.x
-        #self.position.y = startposition.y
-        #self.position.z = startposition.z
+    def gohome(self):
+        self.goto(self.startposition.x,
+                  self.startposition.y,
+                  self.startposition.z)
 
     def pendown(self):
         self._pendown = True
@@ -1110,30 +954,30 @@ class Turtle:
     def speed(self, turtlespeed):
         self.turtlespeed = turtlespeed
 
-    def _drawTurtle(self,x,y,z):
-        #draw turtle
+    def draw_turtle(self, x, y, z):
+        # Draw turtle
         conn.send("world.setBlock", intFloor(x, y, z, self.turtleblock.id, self.turtleblock.data))
-        self.lastDrawnTurtle = Vec3(x,y,z)
+        self.last_drawn_turtle = Vec3(x, y, z)
 
-    def _clearTurtle(self,x,y,z):
-        #clear turtle
+    def clear_turtle(self, x, y, z):
+        # Clear turtle
         conn.send("world.setBlock", intFloor(x, y, z, bl.AIR.id))
 
-    def _findTargetBlock(self, turtleX, turtleY, turtleZ, heading, verticalheading, distance):
-        x,y,z = self._findPointOnSphere(turtleX, turtleY, turtleZ, heading, verticalheading, distance)
-        x = int(round(x,0))
-        y = int(round(y,0))
-        z = int(round(z,0))
-        return x,y,z
-
-    def _findPointOnSphere(self, cx, cy, cz, horizontalAngle, verticalAngle, radius):
-        x = cx + (radius * (math.cos(math.radians(verticalAngle)) * math.cos(math.radians(horizontalAngle))))
-        y = cy + (radius * (math.sin(math.radians(verticalAngle))))
-        z = cz + (radius * (math.cos(math.radians(verticalAngle)) * math.sin(math.radians(horizontalAngle))))
+    def find_target_block(self, turtle_x, turtle_y, turtle_z, heading, verticalheading, distance):
+        x, y, z = self.find_point_on_sphere(turtle_x, turtle_y, turtle_z, heading, verticalheading, distance)
+        x = int(round(x, 0))
+        y = int(round(y, 0))
+        z = int(round(z, 0))
         return x, y, z
 
-    def _roundXYZ(x,y,z):
-        return int(round(x,0)), int(round(y,0)), int(round(z,0))
+    def find_point_on_sphere(self, cx, cy, cz, horizontal_angle, vertical_angle, radius):
+        x = cx + (radius * (math.cos(math.radians(vertical_angle)) * math.cos(math.radians(horizontal_angle))))
+        y = cy + (radius * (math.sin(math.radians(vertical_angle))))
+        z = cz + (radius * (math.cos(math.radians(vertical_angle)) * math.sin(math.radians(horizontal_angle))))
+        return x, y, z
 
-    def _roundVec3(position):
+    def round_xyz(self, x, y, z):
+        return int(round(x, 0)), int(round(y, 0)), int(round(z, 0))
+
+    def round_vec3(self, position):
         return Vec3(int(position.x), int(position.y), int(position.z))
