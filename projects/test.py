@@ -18,9 +18,9 @@ circle([wool, 5], direction="horizontal")
 
 line(gold, 0, 0, 0, 0, 50, 0)
 
-block(ice, y=3)
+block(iron, y=3)
 
-blocks(ice, x=5, y=6, z=10)
+blocks(wood, x=5, y=6, z=10)
 
 size = readnumber("tell the size...")
 
