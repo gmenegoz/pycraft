@@ -5,22 +5,22 @@ chat(pos)
 
 maze("maze1.csv")
 
-t = turtle(ice)
+t = turtle(obsidian)
 t.forward(10)
 
 move(3, 10, 5)
 
 chat(where())
 
-sphere(ice)
+sphere(ice, y=-20)
 
 circle([wool, 5], direction="horizontal")
 
 line(gold, 0, 0, 0, 0, 50, 0)
 
-block(ice, y=3)
+block(iron, y=3)
 
-blocks(ice, x=5, y=6, z=10)
+blocks(wood, x=5, y=6, z=10)
 
 size = readnumber("tell the size...")
 
