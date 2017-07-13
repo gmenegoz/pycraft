@@ -139,6 +139,70 @@ def move(x=0, y=0, z=0, target=player, absolute=False):
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
+def goto(x=0, y=0, z=0, target=player, absolute=True):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    if not absolute:
+        x += pos.x
+        y += pos.y
+        z += pos.z
+    conn.send("entity" + ".setTile", target, intFloor(x, y, z))
+
+
+def changex(x=0, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    x += pos.x
+    y = pos.y
+    z = pos.z
+    conn.send("entity" + ".setTile", target, intFloor(x, y, z))
+
+
+def changey(y=0, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    x = pos.x
+    y += pos.y
+    z = pos.z
+    conn.send("entity" + ".setTile", target, intFloor(x, y, z))
+
+
+def changez(z=0, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    x = pos.x
+    y = pos.y
+    z += pos.z
+    conn.send("entity" + ".setTile", target, intFloor(x, y, z))
+
+
+def setx(x=0, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    x += pos.x
+    y = pos.y
+    z = pos.z
+    conn.send("entity" + ".setTile", target, intFloor(x, y, z))
+
+
+def sety(y=0, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    x = pos.x
+    y += pos.y
+    z = pos.z
+    conn.send("entity" + ".setTile", target, intFloor(x, y, z))
+
+
+def setz(x=0, y=0, z=0, target=player):
+    s = conn.sendReceive("entity" + ".getTile", target)
+    pos = Vec3(*map(int, s.split(",")))
+    x = pos.x
+    y = pos.y
+    z += pos.z
+    conn.send("entity" + ".setTile", target, intFloor(x, y, z))
+
+
 def sphere(block, radius=10, x=0, y=0, z=0, absolute=False, hollow=False, target=player):
     if block is list:
         block_data = block[1]
@@ -882,7 +946,16 @@ class Turtle:
     def setz(self, z):
         self.goto(self.position.x, self.position.y, z)
 
-    def goto(self, x=0, y=0, z=0, absolute=False):
+    def changex(self, x):
+        self.move(x, self.position.y, self.position.z)
+
+    def changey(self, y):
+        self.move(self.position.x, y, self.position.z)
+
+    def changez(self, z):
+        self.move(self.position.x, self.position.y, z)
+
+    def goto(self, x=0, y=0, z=0, absolute=True):
         if not absolute:
             pos = where(player)
             # Clear the turtle
@@ -916,6 +989,9 @@ class Turtle:
                                  self.position.z)
 
     def setposition(self, x=0, y=0, z=0, absolute=False):
+        self.goto(x, y, z, absolute)
+
+    def move(self, x=0, y=0, z=0, absolute=False):
         self.goto(x, y, z, absolute)
 
     def setheading(self, angle):
