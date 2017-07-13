@@ -468,6 +468,8 @@ def over(block, target=player):
     material = int(conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z)))
     if material == block:
         return True
+    else:
+        return False
 
 
 def under(target=player):
@@ -501,6 +503,7 @@ def near(block, radius=10, target=player):
     for b in blocks:
         if b == block:
             return True
+    return False
 
 
 def readnumber(text=""):
@@ -983,13 +986,13 @@ class Turtle:
         self.goto(self.position.x, self.position.y, z)
 
     def changex(self, x):
-        self.move(x, self.position.y, self.position.z)
+        self.move(x, 0, 0)
 
     def changey(self, y):
-        self.move(self.position.x, y, self.position.z)
+        self.move(0, y, 0)
 
     def changez(self, z):
-        self.move(self.position.x, self.position.y, z)
+        self.move(0, 0, z)
 
     def setheading(self, angle):
         self.heading = angle
@@ -1021,7 +1024,7 @@ class Turtle:
         self.flying = False
         self.verticalheading = 0
 
-    def penblock(self, blockId, blockData = 0):
+    def penblock(self, blockId, blockData=0):
         self._penblock = bl.Block(blockId, blockData)
 
     def speed(self, turtlespeed):
