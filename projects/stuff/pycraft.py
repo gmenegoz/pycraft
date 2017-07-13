@@ -139,13 +139,13 @@ def move(x=0, y=0, z=0, target=player, absolute=False):
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
-def goto(x=0, y=0, z=0, target=player, absolute=True):
-    s = conn.sendReceive("entity" + ".getTile", target)
-    pos = Vec3(*map(int, s.split(",")))
-    if not absolute:
-        x += pos.x
-        y += pos.y
-        z += pos.z
+def goto(x=0, y=0, z=0, target=player):
+    # s = conn.sendReceive("entity" + ".getTile", target)
+    # pos = Vec3(*map(int, s.split(",")))
+    # if not absolute:
+    #     x += pos.x
+    #     y += pos.y
+    #     z += pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
@@ -179,7 +179,6 @@ def changez(z=0, target=player):
 def setx(x=0, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
-    x += pos.x
     y = pos.y
     z = pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
@@ -189,17 +188,15 @@ def sety(y=0, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
     x = pos.x
-    y += pos.y
     z = pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
-def setz(x=0, y=0, z=0, target=player):
+def setz(z=0, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
     x = pos.x
     y = pos.y
-    z += pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
@@ -937,24 +934,6 @@ class Turtle:
         if self.flying is False:
             self.flying = True
 
-    def setx(self, x):
-        self.goto(x, self.position.y, self.position.z)
-
-    def sety(self, y):
-        self.goto(self.position.x, y, self.position.z)
-
-    def setz(self, z):
-        self.goto(self.position.x, self.position.y, z)
-
-    def changex(self, x):
-        self.move(x, self.position.y, self.position.z)
-
-    def changey(self, y):
-        self.move(self.position.x, y, self.position.z)
-
-    def changez(self, z):
-        self.move(self.position.x, self.position.y, z)
-
     def goto(self, x=0, y=0, z=0, absolute=True):
         if not absolute:
             pos = where(player)
@@ -993,6 +972,24 @@ class Turtle:
 
     def move(self, x=0, y=0, z=0, absolute=False):
         self.goto(x, y, z, absolute)
+
+    def setx(self, x):
+        self.goto(x, self.position.y, self.position.z)
+
+    def sety(self, y):
+        self.goto(self.position.x, y, self.position.z)
+
+    def setz(self, z):
+        self.goto(self.position.x, self.position.y, z)
+
+    def changex(self, x):
+        self.move(x, self.position.y, self.position.z)
+
+    def changey(self, y):
+        self.move(self.position.x, y, self.position.z)
+
+    def changez(self, z):
+        self.move(self.position.x, self.position.y, z)
 
     def setheading(self, angle):
         self.heading = angle
