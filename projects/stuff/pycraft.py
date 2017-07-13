@@ -139,13 +139,13 @@ def move(x=0, y=0, z=0, target=player, absolute=False):
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
-def goto(x=0, y=0, z=0, target=player, absolute=True):
-    s = conn.sendReceive("entity" + ".getTile", target)
-    pos = Vec3(*map(int, s.split(",")))
-    if not absolute:
-        x += pos.x
-        y += pos.y
-        z += pos.z
+def goto(x=0, y=0, z=0, target=player):
+    # s = conn.sendReceive("entity" + ".getTile", target)
+    # pos = Vec3(*map(int, s.split(",")))
+    # if not absolute:
+    #     x += pos.x
+    #     y += pos.y
+    #     z += pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
@@ -179,7 +179,6 @@ def changez(z=0, target=player):
 def setx(x=0, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
-    x += pos.x
     y = pos.y
     z = pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
@@ -189,17 +188,15 @@ def sety(y=0, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
     x = pos.x
-    y += pos.y
     z = pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
-def setz(x=0, y=0, z=0, target=player):
+def setz(z=0, target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
     x = pos.x
     y = pos.y
-    z += pos.z
     conn.send("entity" + ".setTile", target, intFloor(x, y, z))
 
 
@@ -471,6 +468,8 @@ def over(block, target=player):
     material = int(conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z)))
     if material == block:
         return True
+    else:
+        return False
 
 
 def under(target=player):
@@ -504,6 +503,7 @@ def near(block, radius=10, target=player):
     for b in blocks:
         if b == block:
             return True
+    return False
 
 
 def readnumber(text=""):
@@ -937,24 +937,6 @@ class Turtle:
         if self.flying is False:
             self.flying = True
 
-    def setx(self, x):
-        self.goto(x, self.position.y, self.position.z)
-
-    def sety(self, y):
-        self.goto(self.position.x, y, self.position.z)
-
-    def setz(self, z):
-        self.goto(self.position.x, self.position.y, z)
-
-    def changex(self, x):
-        self.move(x, self.position.y, self.position.z)
-
-    def changey(self, y):
-        self.move(self.position.x, y, self.position.z)
-
-    def changez(self, z):
-        self.move(self.position.x, self.position.y, z)
-
     def goto(self, x=0, y=0, z=0, absolute=True):
         if not absolute:
             pos = where(player)
@@ -994,6 +976,24 @@ class Turtle:
     def move(self, x=0, y=0, z=0, absolute=False):
         self.goto(x, y, z, absolute)
 
+    def setx(self, x):
+        self.goto(x, self.position.y, self.position.z)
+
+    def sety(self, y):
+        self.goto(self.position.x, y, self.position.z)
+
+    def setz(self, z):
+        self.goto(self.position.x, self.position.y, z)
+
+    def changex(self, x):
+        self.move(x, 0, 0)
+
+    def changey(self, y):
+        self.move(0, y, 0)
+
+    def changez(self, z):
+        self.move(0, 0, z)
+
     def setheading(self, angle):
         self.heading = angle
 
@@ -1024,7 +1024,7 @@ class Turtle:
         self.flying = False
         self.verticalheading = 0
 
-    def penblock(self, blockId, blockData = 0):
+    def penblock(self, blockId, blockData=0):
         self._penblock = bl.Block(blockId, blockData)
 
     def speed(self, turtlespeed):
