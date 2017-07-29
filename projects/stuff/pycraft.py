@@ -475,7 +475,7 @@ def over(block, target=player):
 def under(target=player):
     s = conn.sendReceive("entity" + ".getTile", target)
     pos = Vec3(*map(int, s.split(",")))
-    material = conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z))
+    material = int(conn.sendReceive("world.getBlock", intFloor(pos.x, pos.y - 1, pos.z)))
     return material
 
 
@@ -486,7 +486,7 @@ def what(x, y, z, absolute=False, target=player):
         x += pos.x
         y += pos.y
         z += pos.z
-    material = conn.sendReceive("world.getBlock", intFloor(x, y, z))
+    material = int(conn.sendReceive("world.getBlock", intFloor(x, y, z)))
     return material
 
 
