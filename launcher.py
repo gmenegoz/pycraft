@@ -1,6 +1,7 @@
 import os
 import urllib
 import subprocess
+from subprocess import CREATE_NEW_CONSOLE
 
 #print('By continuing you are indicating your agreement to our EULA https://account.mojang.com/documents/minecraft_eula')
 #raw_input('Press ENTER to continue...')
@@ -9,7 +10,7 @@ import subprocess
 # Launch spigot server
 #os.chdir('server/')
 #os.system('java -jar spigot-1.10.2.jar')
-subprocess.Popen(['java', '-jar', 'spigot-1.10.2.jar'], shell=True, cwd='stuff/server/')
+subprocess.Popen(['java', '-jar', 'spigot-1.10.2.jar'], creationflags=CREATE_NEW_CONSOLE, cwd='stuff/server/')
 
 
 # Check for scratch_pycraft file
