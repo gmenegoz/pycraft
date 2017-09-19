@@ -11,7 +11,7 @@ Alessandro Norfo (ale.norfo@gmail.com) & Giuseppe Menegoz (gmenegoz@gmail.com)
 ## Dependencies 
 ### Python
 Install Python 2.7: https://www.python.org/downloads/
-### Install Java JDK
+### Java JDK
 You will also need to install the Java Runtime Environment, to be able to launch the Spigot server. Download the appropriate installer for your operating system: https://java.com/it/download/manual.jsp
 
 ## Pycraft server
