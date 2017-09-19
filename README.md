@@ -5,8 +5,7 @@ Modified, simplified and improved libraries to code in python via Minecraft
 
 Based on the terrific idea and the original code of David Whale and Martin O'Hanlon (www.stuffaboutcode.com)
 
-Alessandro Norfo, ale.norfo@gmail.com
-Giuseppe Menegoz, gmenegoz@gmail.com
+Alessandro Norfo (ale.norfo@gmail.com) & Giuseppe Menegoz (gmenegoz@gmail.com)
 
 # Getting Started
 ## Dependencies 
