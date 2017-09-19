@@ -10,11 +10,11 @@ from subprocess import CREATE_NEW_CONSOLE
 # Launch spigot server
 #os.chdir('server/')
 #os.system('java -jar spigot-1.10.2.jar')
-subprocess.Popen(['java', '-jar', 'spigot-1.10.2.jar'], creationflags=CREATE_NEW_CONSOLE, cwd='stuff/server/')
+subprocess.Popen(['java', '-jar', 'spigot-1.10.2.jar'], creationflags=CREATE_NEW_CONSOLE, cwd='server/')
 
 
 # Check for scratch_pycraft file
-os.chdir('stuff/')
+os.chdir('server/')
 filenames = os.listdir('.')
 check = False
 for f in filenames:
