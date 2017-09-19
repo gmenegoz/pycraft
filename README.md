@@ -45,4 +45,5 @@ Inside your Pycraft outer folder there is a "projects" subfolder. That's where a
 You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.jetbrains.com/pycharm/). If you install Pycharm, we also suggest to import these settings:
 * [WINDOWS or LINUX](https://drive.google.com/open?id=0B9leATA2g5JjT3V4RVNLNWpvNms)
 * [MAC](https://drive.google.com/open?id=0B9leATA2g5JjQTBzSmdETmxCX1k)
+
 So after the first execution, click on FILE -> Import settings and then select the downloaded settings file.
