@@ -9,10 +9,7 @@ Alessandro Norfo, ale.norfo@gmail.com
 Giuseppe Menegoz, gmenegoz@gmail.com
 
 # Getting Started
-## Dependencies
-### Install Python
-First of all, let’s install Python 2.7 on our computer! You can find it at: https://www.python.org/downloads/
- 
+## Dependencies 
 ### Install Java JDK
 You will also need to install the Java Runtime Environment, to be able to launch the Spigot server. Download the appropriate installer for your operating system: https://java.com/it/download/manual.jsp
 
@@ -38,13 +35,3 @@ Let’s start the server by double-clicking the file that corresponds to your op
 Once you launched Minecraft, choose "multiplayer" then "direct connect", typing "localhost" as address.
 If you access the world of Minecraft it means that everything worked properly :) ...otherwise try to re-read the instructions above :(
 
-## RECIPES
-Now that the Pycraft environment is setted up you are ready to explore and play with Python in Minecraft. 
-
-You will find some "Pycraft Recipes" at: https://github.com/sprintingkiwi/pycraft_lib/tree/master/recipes
-
-Refer to the wiki as library documentation: https://github.com/sprintingkiwi/pycraft_lib/wiki
-
-You can also read the full Pycraft "GETTING STARTED" article: 
-ITA: https://goo.gl/e1o5fD
-ENG (Work In Progress): https://goo.gl/XQ62tV
