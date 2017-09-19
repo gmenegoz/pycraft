@@ -10,6 +10,8 @@ Giuseppe Menegoz, gmenegoz@gmail.com
 
 # Getting Started
 ## Dependencies 
+### Python
+Install Python 2.7: https://www.python.org/downloads/
 ### Install Java JDK
 You will also need to install the Java Runtime Environment, to be able to launch the Spigot server. Download the appropriate installer for your operating system: https://java.com/it/download/manual.jsp
 
@@ -32,6 +34,15 @@ First we have to create a new profile to suit the Minecraft server that will be 
 
 Now we are ready to begin!
 
+### Connect to the Pycraft world
 Once you launched Minecraft, choose "multiplayer" then "direct connect", typing "localhost" as address.
 If you access the world of Minecraft it means that everything worked properly :) ...otherwise try to re-read the instructions above :(
 
+### Execute Python scripts in Minecraft
+Inside your Pycraft outer folder there is a "projects" subfolder. That's where all your scripts must be placed. And remember not to delete the "pycraft" subfolder inside the "project" folder: it's the pycraft library!
+
+### Setup an editor for Python
+You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.jetbrains.com/pycharm/). If you install Pycharm, we also suggest to import these settings:
+* [WINDOWS or LINUX](https://drive.google.com/open?id=0B9leATA2g5JjT3V4RVNLNWpvNms)
+* [MAC](https://drive.google.com/open?id=0B9leATA2g5JjQTBzSmdETmxCX1k)
+So after the first execution, click on FILE -> Import settings and then select the downloaded settings file.
