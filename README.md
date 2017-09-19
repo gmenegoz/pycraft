@@ -46,3 +46,9 @@ You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.
 * [MAC](https://drive.google.com/open?id=0B9leATA2g5JjQTBzSmdETmxCX1k)
 
 So after the first execution, click on FILE -> Import settings and then select the downloaded settings file.
+
+### Scratch extension
+If you're planning to use the Pycraft library also in Scratch:
+* Download the following file: [pycraft.s2e](https://raw.githubusercontent.com/sprintingkiwi/pycraft_mod/master/pycraft.s2e)
+* Open Scratch Offline Editor (here's how to install it: https://scratch.mit.edu/download)
+* Pressing SHIFT + Left Click on "File" menu, select "Add an extension" and load the downloaded "pycraft.s2e" file.
