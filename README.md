@@ -31,7 +31,7 @@ First we have to create a new profile to suit the Minecraft server that will be 
 ![alt text](https://lh3.googleusercontent.com/9HTsyfuJTPmwY2USWuHaGFplW9OwBmW0a8GUTTM-X45k6a6Qn3THYcqfVDTnjl7l6qCqae0dm6GPk3NFfEJVU5Tn1SpsO1m6MEfvunrsWmjTeGuhf4z_KDA-XBxuATrbMMpf5De_)
 
 Now we are ready to begin!
-Let’s start the server by double-clicking the file that corresponds to your operating system.
+
 Once you launched Minecraft, choose "multiplayer" then "direct connect", typing "localhost" as address.
 If you access the world of Minecraft it means that everything worked properly :) ...otherwise try to re-read the instructions above :(
 
