@@ -1,4 +1,4 @@
-# Pycraft
+# Pycraft server for Minecraft
 ![alt text](https://alessandronorfo.files.wordpress.com/2017/04/pycraft.png?w=136&h=150)
 
 Modified, simplified and improved libraries to code in python via Minecraft
