@@ -1,0 +1,8 @@
+{ 
+  "extensionName": "Scratch_Pycraft",
+  "extensionPort": 3316,
+  "blockSpecs": [
+    [" ", "sphere block %s radius %n x %n y %n z %n", "sphere"],
+    [" ", "cube block %s side %n x %n y %n z %n", "cube"]
+  ]
+}
