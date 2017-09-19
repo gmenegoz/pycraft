@@ -8,27 +8,27 @@ from subprocess import CREATE_NEW_CONSOLE
 
 
 # Launch spigot server
-#os.chdir('server/')
-#os.system('java -jar spigot-1.10.2.jar')
 subprocess.Popen(['java', '-jar', 'spigot-1.10.2.jar'], creationflags=CREATE_NEW_CONSOLE, cwd='server/')
 
 
+subprocess.Popen(['python', 'scratch_pycraft.py'], cwd='projects/pycraft/')
+
 # Check for scratch_pycraft file
-os.chdir('server/')
-filenames = os.listdir('.')
-check = False
-for f in filenames:
-    if f == 'scatch_pycraft.py':
-        check = True
-        print('scratch_pycraft.py found, executing it...')
-        subprocess.Popen(['python', 'scratch_pycraft.py'], shell=True)
-if not check:
-    try:
-        urllib.urlretrieve('https://raw.githubusercontent.com/sprintingkiwi/pycraft_mod/development/scratch_pycraft.py',
-                           'scratch_pycraft.py')
-    except:
-        print('Cannot retrieve scratch_pycraft.py')
-    else:
-        print('scratch_pycraft.py successfully retrieved, executing it...')
-        subprocess.Popen(['python', 'scratch_pycraft.py'], shell=True)
+#os.chdir('projects/pycraft/')
+#filenames = os.listdir('.')
+#check = False
+#for f in filenames:
+    #if f == 'scatch_pycraft.py':
+        #check = True
+        #print('scratch_pycraft.py found, executing it...')
+        #subprocess.Popen(['python', 'scratch_pycraft.py'], shell=True)
+#if not check:
+    #try:
+        #urllib.urlretrieve('https://raw.githubusercontent.com/sprintingkiwi/pycraft_mod/development/scratch_pycraft.py',
+                           #'scratch_pycraft.py')
+    #except:
+        #print('Cannot retrieve scratch_pycraft.py')
+    #else:
+        #print('scratch_pycraft.py successfully retrieved, executing it...')
+        #subprocess.Popen(['python', 'scratch_pycraft.py'], shell=True)
 
