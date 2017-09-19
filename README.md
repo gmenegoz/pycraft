@@ -49,6 +49,6 @@ So after the first execution, click on FILE -> Import settings and then select t
 
 ### Scratch extension
 If you're planning to use the Pycraft library also in Scratch:
-* Download the following file: [pycraft.s2e](https://raw.githubusercontent.com/sprintingkiwi/pycraft_mod/master/pycraft.s2e)
 * Open Scratch Offline Editor (here's how to install it: https://scratch.mit.edu/download)
-* Pressing SHIFT + Left Click on "File" menu, select "Add an extension" and load the downloaded "pycraft.s2e" file.
+* Pressing SHIFT + Left Click on "File" menu, select "Add an extension"
+* Select the [pycraft.s2e](https://raw.githubusercontent.com/gmenegoz/pycraft/master/pycraft.s2e) file you can found inside the Pycraft folder
