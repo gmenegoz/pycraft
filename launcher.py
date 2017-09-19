@@ -20,6 +20,8 @@ check = False
 for f in filenames:
     if f == 'scatch_pycraft.py':
         check = True
+        print('scratch_pycraft.py found, executing it...')
+        subprocess.Popen(['python', 'scratch_pycraft.py'], shell=True)
 if not check:
     try:
         urllib.urlretrieve('https://raw.githubusercontent.com/sprintingkiwi/pycraft_mod/development/scratch_pycraft.py',
