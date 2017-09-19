@@ -51,6 +51,4 @@ composer.lock
 # Minecraft world files #
 #########################
 
-/server/world/
-/server/world_nether/
-/server/world_the_end/
+server/
