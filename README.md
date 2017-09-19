@@ -21,7 +21,9 @@ You will also need to install the Java Runtime Environment, to be able to launch
 After installing Python and Java, you can download this repository (master branch). Now, extract the zip archive contents and open the Pycraft folder.
 
 ### Launch the server
-Execute the "launcher.py" file. It will launch a Spigot server locally, on your computer, to which we would then connect to Minecraft so that our projects in Python can be run within the game. In order for a python script can communicate with a game of Minecraft, it is in fact your computer must be running the server.
+Execute the "launcher.py" file. It will launch a Spigot server locally, on your computer, to which we would then connect via Minecraft, so that our scripts in Python will be run within the game.
+
+NOTE: In order for a python script to communicate with the Minecraft world, the Pycraft server must always be up and running.
 
 ## Minecraft
 Now open Minecraft.
