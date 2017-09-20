@@ -78,6 +78,13 @@ def cube(block, side, x, y, z):
     return "OK"
     
 
+@app.route('/over/<string:block>')
+def over(block):
+    #print("check if player is over " + block)
+    return pcmt.over(pcmt.getblock(block))
+
+
+
 print(" * The Scratch helper app is running. Have fun :)")
 print(" * See mrproctor.net/scratch for help.")
 print(" * Press Control + C to quit.")
