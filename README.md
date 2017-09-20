@@ -47,6 +47,9 @@ You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.
 
 So after the first execution, click on FILE -> Import settings and then select the downloaded settings file.
 
+### Recipes
+You can find some example script inside the [projects(https://github.com/gmenegoz/pycraft/tree/master/projects) folder
+
 ### Scratch extension
 If you're planning to use the Pycraft library also in Scratch:
 * Open Scratch Offline Editor (here's how to install it: https://scratch.mit.edu/download)
