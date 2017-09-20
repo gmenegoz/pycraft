@@ -53,6 +53,8 @@ You can find some example script inside the [projects](https://github.com/gmeneg
 ### Documentation
 Refer to the [Wiki](https://github.com/gmenegoz/pycraft/wiki) of this repository as library documentation.
 
+Or you can read the full [getting started article](https://drive.google.com/open?id=1llSHBCEhkrPhav0oZjyfd_CUMyBJSw-M3nCBkghgGcQ).
+
 ### Scratch extension
 If you're planning to use the Pycraft library also in Scratch:
 * Open Scratch Offline Editor (here's how to install it: https://scratch.mit.edu/download)
