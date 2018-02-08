@@ -3,6 +3,7 @@
   "extensionPort": 3316,
   "blockSpecs": [
     [" ", "sphere block %s radius %n x %n y %n z %n", "sphere"],
-    [" ", "cube block %s side %n x %n y %n z %n", "cube"]
+    [" ", "cube block %s side %n x %n y %n z %n", "cube"],
+    ["b", "over block %s", "over"]
   ]
 }
