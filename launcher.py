@@ -8,7 +8,7 @@ import sys
 
 # Launch spigot server
 
-nplatform = sys.platform == "win32"
+mswinplatform = sys.platform == "win32"
 
 if mswinplatform:
     subprocess.Popen(['java', '-jar', 'spigot-1.10.2.jar'], creationflags=subprocess.CREATE_NEW_CONSOLE, cwd='server/')
