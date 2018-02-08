@@ -12,8 +12,9 @@ Alessandro Norfo (ale.norfo@gmail.com) & Giuseppe Menegoz (gmenegoz@gmail.com)
 ### Python
 Install Python 2.7: https://www.python.org/downloads/
 
-Install Flask library:
-- pip install flask
+Install Pycraft library:
+- pip install pycraft_minetest
+
 ### Java JDK
 You will also need to install the Java Runtime Environment, to be able to launch the Spigot server. Download the appropriate installer for your operating system: https://java.com/it/download/manual.jsp
 
@@ -41,7 +42,7 @@ Once you launched Minecraft, choose "multiplayer" then "direct connect", typing 
 If you access the world of Minecraft it means that everything worked properly :) ...otherwise try to re-read the instructions above :(
 
 ### Execute Python scripts in Minecraft
-Inside your Pycraft outer folder there is a "projects" subfolder. That's where all your scripts must be placed. And remember not to delete the "pycraft" subfolder inside the "project" folder: it's the pycraft library!
+
 
 ### Setup an editor for Python
 You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.jetbrains.com/pycharm/). If you install Pycharm, we also suggest to import these settings:
@@ -59,7 +60,5 @@ Refer to the [Wiki](https://github.com/gmenegoz/pycraft/wiki) of this repository
 Or you can read the full [getting started article](https://drive.google.com/open?id=1llSHBCEhkrPhav0oZjyfd_CUMyBJSw-M3nCBkghgGcQ).
 
 ### Scratch extension
-If you're planning to use the Pycraft library also in Scratch:
-* Open Scratch Offline Editor (here's how to install it: https://scratch.mit.edu/download)
-* Pressing SHIFT + Left Click on "File" menu, select "Import experimental HTTP extension"
-* Select the [pycraft.s2e](https://raw.githubusercontent.com/gmenegoz/pycraft/master/pycraft.s2e) file you can find inside the Pycraft folder
+
+
