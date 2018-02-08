@@ -1,4 +1,4 @@
-from pycraft import *
+from pycraft_minetest import *
 
 # Create a Turtle object
 kiki = Turtle([wool, random.randint(1, 12)])

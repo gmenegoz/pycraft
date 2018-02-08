@@ -1,4 +1,4 @@
-from pycraft import *
+from pycraft_minetest import *
 
 # Store player position in a variable
 pos = where()
@@ -10,6 +10,6 @@ while True:
 
     # Sequentially create many spheres with different materials
     # but in the same absolute position
-    sphere(grass, 20, x=pos.x+25, y=pos.y, z=pos.z, absolute=True)
-    sphere(gold, 20, x=pos.x+25, y=pos.y, z=pos.z, absolute=True)
-    sphere(ice, 20, x=pos.x+25, y=pos.y, z=pos.z, absolute=True)
+    sphere(grass, 10, x=pos.x+25, y=pos.y, z=pos.z, absolute=True)
+    sphere(gold, 10, x=pos.x+25, y=pos.y, z=pos.z, absolute=True)
+    sphere(ice, 10, x=pos.x+25, y=pos.y, z=pos.z, absolute=True)

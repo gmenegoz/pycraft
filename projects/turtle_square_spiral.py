@@ -1,4 +1,4 @@
-from pycraft import *
+from pycraft_minetest import *
 
 # Instance a Turtle object
 uga = Turtle(obsidian)

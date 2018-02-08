@@ -1,4 +1,4 @@
-from pycraft import *
+from pycraft_minetest import *
 
 # FOREVER
 while True:

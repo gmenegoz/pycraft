@@ -1,4 +1,4 @@
-from pycraft import *
+from pycraft_minetest import *
 import datetime
 ov = 0
 mv = 0

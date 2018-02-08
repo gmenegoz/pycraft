@@ -1,4 +1,4 @@
-from pycraft import *
+from pycraft_minetest import *
 
 # Create a sphere of glass (so you can see through)
 sphere(glass, 20, z=25)

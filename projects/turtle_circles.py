@@ -1,4 +1,4 @@
-from pycraft import *
+from pycraft_minetest import *
 
 # Create a Turtle object
 uga = Turtle([wool, 0])
