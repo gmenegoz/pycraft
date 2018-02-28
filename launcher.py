@@ -1,6 +1,6 @@
-import subprocess
+import os
 
-print("Start")
+print("Starting Pycraft Spigot server")
 
 # Launch spigot server
-p = subprocess.Popen(['java', '-jar', 'spigot-1.12.2.jar'], cwd='server/')
+os.system("(cd server/ && java -jar spigot-1.12.2.jar)")
