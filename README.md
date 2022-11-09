@@ -43,14 +43,6 @@ If you access the world of Minecraft it means that everything worked properly :)
 
 ## Execute Python scripts in Minecraft
 
-### Setup an editor for Python
-You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.jetbrains.com/pycharm/). If you install Pycharm, we also suggest to import these settings:
-* [WINDOWS or LINUX](https://drive.google.com/open?id=0B9leATA2g5JjT3V4RVNLNWpvNms)
-* [MAC](https://drive.google.com/open?id=0B9leATA2g5JjQTBzSmdETmxCX1k)
-
-So after the first execution, click on FILE -> Import settings and then select the downloaded settings file.
-
-### Code Examples
-You can find some example script inside the [projects](https://github.com/gmenegoz/pycraft/tree/master/projects) folder.
+You can refer to this repository: https://github.com/sprintingkiwi/pycraft_lib
 
 
