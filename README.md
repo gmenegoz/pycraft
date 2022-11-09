@@ -41,8 +41,7 @@ Now we are ready to begin!
 Once you launched Minecraft, choose "multiplayer" then "direct connect", typing "localhost" as address.
 If you access the world of Minecraft it means that everything worked properly :) ...otherwise try to re-read the instructions above :(
 
-### Execute Python scripts in Minecraft
-
+## Execute Python scripts in Minecraft
 
 ### Setup an editor for Python
 You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.jetbrains.com/pycharm/). If you install Pycharm, we also suggest to import these settings:
@@ -51,14 +50,7 @@ You can use your favourite Python IDE... anyway we suggest Pycharm (https://www.
 
 So after the first execution, click on FILE -> Import settings and then select the downloaded settings file.
 
-### Recipes
+### Code Examples
 You can find some example script inside the [projects](https://github.com/gmenegoz/pycraft/tree/master/projects) folder.
-
-### Documentation
-Refer to the [Wiki](https://github.com/gmenegoz/pycraft/wiki) of this repository as library documentation.
-
-Or you can read the full [getting started article](https://drive.google.com/open?id=1llSHBCEhkrPhav0oZjyfd_CUMyBJSw-M3nCBkghgGcQ).
-
-### Scratch extension
 
 
